@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SAE Projects — Amrut Nuli</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">AN//</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="sae-projects.html" class="active">SAE Projects</a></li>
+    <li><a href="academic-projects.html">Academic Projects</a></li>
+    <li><a href="work-experience.html">Work Experience</a></li>
+    <li><a href="achievements.html">Achievements</a></li>
+    <li><a href="certifications.html">Certifications</a></li>
+    <li><a href="research.html">Research</a></li>
+  </ul>
+   <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Toggle dark/light mode">
+    <span class="theme-toggle-icon" id="icon-light">☀️</span>
+    <span class="theme-toggle-icon" id="icon-dark">🌙</span>
+  </button>
+</nav>
+
+<main class="page">
+
+  <div class="page-header">
+    <div class="page-eyebrow">Projects / SAE</div>
+    <div class="page-title">SAE Competition Projects</div>
+    <div class="page-sub">National-level aerospace design competitions — aircraft, UAVs, and autonomous systems.</div>
+  </div>
+
+  <!-- ── PROJECT 1 ── -->
+  <div class="project-card">
+    <div class="project-header">
+      <div class="project-title">Regular Class RC Aircraft — SAE Aero Design Challenge 2022</div>
+      <div class="project-rank">AIR 1</div>
+    </div>
+    <div class="project-date">Oct 2021 – Sep 2022 &nbsp;·&nbsp; Member, AeroKLE Aero Design Team</div>
+
+    <!-- CAROUSEL
+         Put your images in: images/sae2022/
+         Rename them exactly as listed in src below, OR update the src paths to match your file names. -->
+    <div class="carousel" id="c-sae2022"></div>
+
+    <p class="project-obj">
+      Objective: Design a low-speed aircraft that carries maximum payload with empty weight &lt;5 kg, subject to
+      design and material constraints, and successfully fly within SAE-specified takeoff and landing distances.
+    </p>
+    
+    <div class="tools-row">
+      
+      <span class="tool-tag">SolidWorks</span>
+      <span class="tool-tag">ANSYS</span>
+      <span class="tool-tag">XFLR5</span>
+      <span class="tool-tag">Topology Optimization</span>
+      <span class="tool-tag">CG Calculations</span>
+      <span class="tool-tag">Laser Cutting</span>
+      <span class="tool-tag">Sheet Metal</span>
+      <span class="tool-tag">3D Printing</span>
+      
+    </div>
+
+      <p class="project-obj">
+         My Role:
+        </p>
+    <ul class="project-bullets">
+      
+      <li><strong>Structures:</strong> CG calculations and ANSYS topology optimization of fuselage assemblies and components.</li>
+      <li><strong>Aerodynamics:</strong> Airfoil selection and L/D ratio optimization for low-speed flight using XFLR5.</li>
+      <li><strong>CAD &amp; Drafting:</strong> 3D wing and tail assemblies in SolidWorks with manufacturing-ready 2D drawings.</li>
+      <li><strong>Manufacturing:</strong> Laser cutting, sheet metal bending, additive manufacturing (3D printing).</li>
+      <li><strong>Innovation:</strong> Composite wing spar (balsa-birch sandwich) improved flexural strength by 15.4%.</li>
+      <li><strong>Result:</strong> AIR 1 — highest payload of 9 kg (MTOW 14 kg), all flight requirements completed.</li>
+    </ul>
+<div class="collapsible" onclick="toggleCollapsible(this)">
+  <div class="collapsible-header">
+    <span class="collapsible-title">General Specifications</span>
+    <span class="collapsible-icon">▼</span>
+  </div>
+  <div class="collapsible-body">
+    <div class="label" style="margin-bottom:10px;">Key specs</div>
+    <table class="spec-table">
+      <tr><td>Wingspan</td><td>2.4 m (94.5 in)</td></tr>
+      <tr><td>Empty weight</td><td>5 kg</td></tr>
+      <tr><td>Max takeoff weight</td><td>14 kg</td></tr>
+      <tr><td>Payload carried</td><td>9 kg</td></tr>
+      <tr><td>Airfoil</td><td>Fx74-C15-140</td></tr>
+      <tr><td>Cruise speed</td><td>15.11 m/s</td></tr>
+      <tr><td>Stall speed</td><td>10.34 m/s</td></tr>
+      <tr><td>Takeoff distance</td><td>34.33 m</td></tr>
+    </table>
+
+    </div>
+</div>
+<div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; align-items:center;">
+  <a href="https://drive.google.com/file/d/1tQbfBQ1asU3lTxCbpDRwIHP8BrB_DIwG/view"
+     target="_blank"
+     style="display:inline-flex; align-items:center; gap:8px;
+            font-size:13px; font-weight:500;
+            background:var(--accent-dim); color:var(--accent);
+            border:1px solid var(--accent-border);
+            border-radius:20px; padding:8px 18px;
+            text-decoration:none;
+            transition:background 0.15s;">
+    ▶&nbsp; Watch flight video of RC Aircraft at SAE ADC 2022 event carrying 9Kg payload
+  </a>
+</div>
+    <a class="proj-link" href="https://www.papermark.com/view/cmmnq4bdk0006lc04gyyun6wr" target="_blank">Full project report ↗</a>
+  </div>
+
+  <!-- ── PROJECT 2 ── -->
+  <div class="project-card">
+    <div class="project-header">
+      <div class="project-title">Multirotor UAV for Precision Cargo Delivery — SAE Aerothon 2022</div>
+      <div class="project-rank green">AIR 9</div>
+    </div>
+    <div class="project-date">Mar 2022 – Nov 2022 &nbsp;·&nbsp; Designer, AeroKLE Aero Design Team</div>
+
+    <div class="carousel" id="c-aerothon2022"></div>
+
+    <p class="project-obj">
+      Objective: Design, build, and fly a stable, efficient multirotor UAV capable of delivering cargo to a
+      specified location using both manual and autonomous approaches — total takeoff weight &lt;1.8 kg, T/W ratio &gt;2.
+    </p>
+<div class="tools-row">
+  
+      <span class="tool-tag">SolidWorks</span>
+      <span class="tool-tag">ANSYS</span>
+      <span class="tool-tag">Ultimaker CURA</span>
+      <span class="tool-tag">Topology Optimization</span>
+      <span class="tool-tag">Impact Analysis</span>
+  
+    </div>
+    
+      <p class="project-obj">
+         My Role:
+        </p>
+      <ul class="project-bullets">
+        
+      <li><strong>Design &amp; Optimization:</strong> Engineered UAV rotor hub and components using SolidWorks and ANSYS topology optimization to maintain total weight &lt;1.8 kg.</li>
+      <li><strong>Structural Analysis:</strong> Impact analysis on landing gear using ANSYS to ensure integrity during high-stress recovery phases.</li>
+      <li><strong>Materials:</strong> Developed a comprehensive Material Selection Matrix aligned with 3D printing capabilities.</li>
+      <li><strong>Additive Manufacturing:</strong> Optimized slicing parameters in Ultimaker CURA for ideal strength-to-weight ratio.</li>
+    </ul>
+
+    <a class="proj-link" href="https://www.papermark.com/view/cmmnmfp710001la04xfdl3rt6" target="_blank">Full project report ↗</a>
+  </div>
+
+  <!-- ── PROJECT 3 ── -->
+  <div class="project-card">
+    <div class="project-header">
+      <div class="project-title">Tactical Multirotor UAV — SAE Aerothon 2023</div>
+      <div class="project-rank">AIR 4</div>
+    </div>
+    <div class="project-date">Jan 2023 – Nov 2023 &nbsp;·&nbsp; Captain, AeroKLE Aero Design Team</div>
+
+    <div class="carousel" id="c-aerothon2023"></div>
+
+    <p class="project-obj">
+      Objective: Design a micro-category multirotor UAV (takeoff weight &lt;2 kg) for controlled takeoff, autonomous
+      navigation, hotspot target identification, precision payload drop, and safe return within stipulated time.
+    </p>
+    
+<div class="tools-row">
+  
+      <span class="tool-tag">SolidWorks</span>
+      <span class="tool-tag">ANSYS Fluent</span>
+      <span class="tool-tag">CFD</span>
+      <span class="tool-tag">Topology Optimization</span>
+      <span class="tool-tag">Additive Manufacturing</span>
+  
+    </div>
+    
+      <p class="project-obj">
+         My Role:
+        </p>
+    <ul class="project-bullets">
+      
+      <li><strong>Strategic Leadership:</strong> Led conceptual design and structural analysis phases end-to-end as project captain.</li>
+      <li><strong>Advanced CFD:</strong> High-fidelity ANSYS Fluent analysis to mitigate downwash effects and ensure flight stability.</li>
+      <li><strong>Weight Optimization:</strong> Topology optimization (ANSYS) to achieve target T/W ratio &gt;2.0.</li>
+      <li><strong>Manufacturing:</strong> Additive manufacturing parameter optimization — reduced print time by 65%, component weight by 40%.</li>
+      <li><strong>Systems Integration:</strong> Managed cross-functional mechanical and avionic timelines through mission testing.</li>
+    </ul>
+
+    <a class="proj-link" href="https://www.papermark.com/view/cmmnn4xif000al504mrufzq5y" target="_blank">Full project report ↗</a>
+  </div>
+
+</main>
+
+<footer>
+  amrutnuli558@gmail.com &nbsp;·&nbsp;
+  <a href="https://www.linkedin.com/in/amrut-nuli/" target="_blank">linkedin.com/in/amrut-nuli</a>
+</footer>
+
+<script src="carousel.js"></script>
+<script>
+
+  createCarousel(document.getElementById('c-sae2022'), [
+    { src: 'images/sae2022/01-cad-model.png',         caption: 'Skeleton CAD model — SolidWorks' },
+    { src: 'images/sae2022/02-manufactured.png',      caption: 'Manufactured RC aircraft' },
+    { src: 'images/sae2022/03-cfd.jpg',               caption: 'Overall plane CFD analysis' },
+    { src: 'images/sae2022/04-ansys.png',             caption: 'Fuselage structural analysis — ANSYS' },
+    { src: 'images/sae2022/05-downwashanalysis.png',  caption: 'Aerodynamic Downwash Analysis using XFLR5' },
+  ]);
+
+  createCarousel(document.getElementById('c-aerothon2022'), [
+    { src: 'images/aerothon2022/01-uav-specs.png',    caption: 'UAV specifications' },
+    { src: 'images/aerothon2022/02-payload-mech.gif', caption: 'Payload dropping mechanism' },
+    { src: 'images/aerothon2022/03-ansys.png',        caption: 'Structural analysis — ANSYS' },
+    { src: 'images/aerothon2022/04-prototype.jpg',    caption: 'Manufactured UAV prototype' },
+  ]);
+
+  createCarousel(document.getElementById('c-aerothon2023'), [
+    { src: 'images/aerothon2023/01-cad-model.jpg',        caption: 'CAD model — SolidWorks' },
+    { src: 'images/aerothon2023/02-uav-specs.jpg',        caption: 'UAV specifications' },
+    { src: 'images/aerothon2023/03-mission-profile.jpg',  caption: 'SAE Aerothon 2023 mission profile' },
+    { src: 'images/aerothon2023/04-payload.gif',          caption: 'Payload dropping mechanism' },
+    { src: 'images/aerothon2023/05-cfd.png',              caption: 'Downwash analysis — ANSYS Fluent' },
+    { src: 'images/aerothon2023/06-prototype.jpeg',       caption: 'UAV prototype' },
+  ]);
+
+  function toggleCollapsible(el) {
+    el.classList.toggle('open');
+  }
+  
+ function applyTheme(dark) {
+    document.body.classList.toggle('dark', dark);
+    document.getElementById('icon-light').classList.toggle('active', !dark);
+    document.getElementById('icon-dark').classList.toggle('active', dark);
+  }
+
+  function toggleTheme() {
+    const isDark = document.body.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    applyTheme(!isDark);
+  }
+
+  applyTheme(localStorage.getItem('theme') === 'dark');
+
+</script>
+
+</body>
+</html>

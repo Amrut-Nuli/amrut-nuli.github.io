@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Amrut Nuli — Mechanical Engineer</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">AN//</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="sae-projects.html">SAE Projects</a></li>
+    <li><a href="academic-projects.html">Academic Projects</a></li>
+    <li><a href="work-experience.html">Work Experience</a></li>
+    <li><a href="achievements.html">Achievements</a></li>
+    <li><a href="certifications.html">Certifications</a></li>
+    <li><a href="research.html">Research</a></li>
+  </ul>
+  <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Toggle dark/light mode">
+    <span class="theme-toggle-icon" id="icon-light">☀️</span>
+    <span class="theme-toggle-icon" id="icon-dark">🌙</span>
+  </button>
+</nav>
+
+<main class="page">
+
+  <!-- ── HERO ── -->
+  <div class="hero-row">
+
+    <!-- Profile photo -->
+    <div class="avatar-wrap" style="width:110px; height:110px;">
+      <img src="images/profile/photo.jpg" alt="Amrut Nuli"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+      <div class="avatar-initials" style="display:none;">AN</div>
+    </div>
+
+    <!-- Name + title -->
+    <div style="flex:1; min-width:0;">
+      <div class="hero-name">Amrut Nuli</div>
+      <div class="hero-title-line">
+        <span>Mechanical Engineer</span>
+        <span class="hero-dot">·</span>
+        <span>CAD / CAE</span>
+        <span class="hero-dot">·</span>
+        <span>Automotive Product Design</span>
+      </div>
+    </div>
+
+<!-- Credential badges — right aligned -->
+<div style="display:flex; flex-direction:column; align-items:flex-end;
+            gap:10px; flex-shrink:0;">
+  <div style="font-size:10px; font-family:'DM Mono',monospace;
+              text-transform:uppercase; letter-spacing:0.1em;
+              color:var(--text3); text-align:right; margin-bottom:2px;">
+    Credentials
+  </div>
+
+  <!-- Row 1 — 4 badges -->
+  <div style="display:grid; grid-template-columns:repeat(4, 72px); gap:8px;">
+
+    <a href="https://www.credly.com/badges/6abbfff7-89fe-4c32-a767-18a393b9e136"
+       target="_blank" title="Click to verify on Credly">
+      <img src="images/badges/badge-1.png" alt="Credential Badge 1"
+           style="width:72px; height:72px; object-fit:contain; display:block;
+                  transition:transform 0.2s, opacity 0.2s; opacity:0.9;"
+           onmouseover="this.style.transform='scale(1.1)'; this.style.opacity='1'"
+           onmouseout="this.style.transform='scale(1)'; this.style.opacity='0.9'"/>
+    </a>
+
+    <a href="https://www.credly.com/badges/c53f338e-df03-4ca5-ad99-1e9cc7ef1392"
+       target="_blank" title="Click to verify on Credly">
+      <img src="images/badges/badge-2.png" alt="Credential Badge 2"
+           style="width:72px; height:72px; object-fit:contain; display:block;
+                  transition:transform 0.2s, opacity 0.2s; opacity:0.9;"
+           onmouseover="this.style.transform='scale(1.1)'; this.style.opacity='1'"
+           onmouseout="this.style.transform='scale(1)'; this.style.opacity='0.9'"/>
+    </a>
+
+    <a href="https://www.credly.com/badges/e3f181ad-5f9e-4975-9733-bbbe692f7ce8"
+       target="_blank" title="Click to verify on Credly">
+      <img src="images/badges/badge-3.png" alt="Credential Badge 3"
+           style="width:72px; height:72px; object-fit:contain; display:block;
+                  transition:transform 0.2s, opacity 0.2s; opacity:0.9;"
+           onmouseover="this.style.transform='scale(1.1)'; this.style.opacity='1'"
+           onmouseout="this.style.transform='scale(1)'; this.style.opacity='0.9'"/>
+    </a>
+
+    <a href="https://www.credly.com/badges/d7712d7a-e00e-4a6d-b350-fc04dd3a1cb3"
+       target="_blank" title="Click to verify on Credly">
+      <img src="images/badges/badge-4.png" alt="Credential Badge 4"
+           style="width:72px; height:72px; object-fit:contain; display:block;
+                  transition:transform 0.2s, opacity 0.2s; opacity:0.9;"
+           onmouseover="this.style.transform='scale(1.1)'; this.style.opacity='1'"
+           onmouseout="this.style.transform='scale(1)'; this.style.opacity='0.9'"/>
+    </a>
+
+  </div>
+
+  <!-- Row 2 — remaining badges -->
+  <div style="display:grid; grid-template-columns:repeat(4, 72px); gap:8px;">
+
+    <a href="https://www.credly.com/badges/d7712d7a-e00e-4a6d-b350-fc04dd3a1cb3"
+       target="_blank" title="Click to verify on Credly">
+      <img src="images/badges/badge-5.png" alt="Credential Badge 5"
+           style="width:72px; height:72px; object-fit:contain; display:block;
+                  transition:transform 0.2s, opacity 0.2s; opacity:0.9;"
+           onmouseover="this.style.transform='scale(1.1)'; this.style.opacity='1'"
+           onmouseout="this.style.transform='scale(1)'; this.style.opacity='0.9'"/>
+    </a>
+
+    <!-- Add more badges here in row 2 if needed, same pattern -->
+
+  </div>
+
+</div>
+
+</div>
+  <!-- ── END HERO ROW ── -->
+
+  <!-- ── CTAs ── -->
+  <div class="btn-row">
+    <a class="btn primary" href="https://www.papermark.com/view/cmmp3pbql000fjv04pdbtxovd" target="_blank">View CV ↗</a>
+    <a class="btn" href="https://www.linkedin.com/in/amrut-nuli/" target="_blank">LinkedIn ↗</a>
+    <a class="btn" href="mailto:amrutnuli558@gmail.com">Email me</a>
+  </div>
+
+  <hr/>
+
+  <!-- ── ABOUT ── -->
+  <div class="label">About me</div>
+  <p style="font-size:15.5px; color:var(--text2); line-height:1.85; max-width:660px;">
+    Mechanical Engineer with 1 year of R&amp;D experience at
+    <a href="work-experience.html" style="color:var(--text); border-bottom:1px solid var(--border2); text-decoration:none; font-weight:500;">Daimler Truck Innovation Center India</a>,
+    specialising in automotive product design, wiring harness routing, and configuration management
+    using Siemens NX, Smaragd (PDM) and Teamcenter. Achieved AIR 1 in SAE Aero Design challenge 2022
+    being a member of
+    <a href="https://aerokle.in/" style="color:var(--text); border-bottom:1px solid var(--border2); text-decoration:none; font-weight:500;">AeroKLE SAE Aero design team</a>,
+    Led the team at 2023 SAE Aerothon (AIR 4) and SAE ADDC 2023 (AIR 2); Gold Medalist in my graduating
+    batch at KLE Technological University. Currently seeking a challenging Design &amp; Analysis Engineering role.
+  </p>
+
+  <hr/>
+
+  <!-- ── HIGHLIGHTS ── -->
+  <div class="label">Highlights</div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-val">AIR 1</div>
+      <div class="stat-desc">SAE Aero Design Challenge 2022</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">AIR 2</div>
+      <div class="stat-desc">SAE ADDC 2023</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">AIR 4</div>
+      <div class="stat-desc">SAE Aerothon 2023</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">1 yr</div>
+      <div class="stat-desc">Industry R&amp;D — Daimler Truck Innovation Center India</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">Gold Medal</div>
+      <div class="stat-desc">Mech. Engg. batch of 2024 — KLE Tech University</div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <!-- ── SKILLS ── -->
+  <div class="label">Technical skills</div>
+
+  <div class="skill-section">
+    <div class="skill-label">CAD — Design &amp; Modelling</div>
+    <div class="pill-row">
+      <span class="pill">Siemens NX</span>
+      <span class="pill">SolidWorks</span>
+      <span class="pill">CATIA V5</span>
+      <span class="pill">AutoCAD</span>
+      <span class="pill">Fusion 360</span>
+      <span class="pill">GD&amp;T</span>
+    </div>
+  </div>
+
+  <div class="skill-section">
+    <div class="skill-label">CAE — Simulation &amp; Analysis</div>
+    <div class="pill-row">
+      <span class="pill">ANSYS Mechanical</span>
+      <span class="pill">Hypermesh</span>
+      <span class="pill">Inspire</span>
+      <span class="pill">XFLR5</span>
+      <span class="pill">MATLAB</span>
+    </div>
+  </div>
+
+  <div class="skill-section">
+    <div class="skill-label">Other tools</div>
+    <div class="pill-row">
+      <span class="pill">Siemens Teamcenter</span>
+      <span class="pill">Smaragd PDM</span>
+      <span class="pill">Python</span>
+      <span class="pill">MS Office Suite</span>
+    </div>
+  </div>
+
+  <hr/>
+
+  <!-- ── EXPLORE ── -->
+  <div class="label">Explore</div>
+  <div class="explore-grid">
+    <a href="sae-projects.html" class="explore-card">
+      <div class="explore-type">Projects</div>
+      <div class="explore-title">SAE Projects</div>
+      <div class="explore-sub">4 national competitions</div>
+    </a>
+    <a href="academic-projects.html" class="explore-card">
+      <div class="explore-type">Projects</div>
+      <div class="explore-title">Academic Projects</div>
+      <div class="explore-sub">5 design &amp; analysis projects</div>
+    </a>
+    <a href="work-experience.html" class="explore-card">
+      <div class="explore-type">Experience</div>
+      <div class="explore-title">Work Experience</div>
+      <div class="explore-sub">Daimler Truck India</div>
+    </a>
+    <a href="achievements.html" class="explore-card">
+      <div class="explore-type">Awards</div>
+      <div class="explore-title">Achievements</div>
+      <div class="explore-sub">AIR 1, 2 &amp; 4 nationally</div>
+    </a>
+    <a href="certifications.html" class="explore-card">
+      <div class="explore-type">Credentials</div>
+      <div class="explore-title">Certifications</div>
+      <div class="explore-sub">CAD, CAE &amp; more</div>
+    </a>
+    <a href="research.html" class="explore-card">
+      <div class="explore-type">Publication</div>
+      <div class="explore-title">Research Paper</div>
+      <div class="explore-sub">ICAPSM 2024</div>
+    </a>
+  </div>
+
+</main>
+
+<footer>
+  amrutnuli558@gmail.com &nbsp;·&nbsp;
+  <a href="https://www.linkedin.com/in/amrut-nuli/" target="_blank">linkedin.com/in/amrut-nuli</a>
+</footer>
+
+<script>
+  function applyTheme(dark) {
+    document.body.classList.toggle('dark', dark);
+    document.getElementById('icon-light').classList.toggle('active', !dark);
+    document.getElementById('icon-dark').classList.toggle('active', dark);
+  }
+  function toggleTheme() {
+    const isDark = document.body.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    applyTheme(!isDark);
+  }
+  (function() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark') applyTheme(true);
+    else applyTheme(false);
+  })();
+</script>
+
+</body>
+</html>

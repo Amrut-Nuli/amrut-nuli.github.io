@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Academic Projects — Amrut Nuli</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">AN//</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="sae-projects.html">SAE Projects</a></li>
+    <li><a href="academic-projects.html" class="active">Academic Projects</a></li>
+    <li><a href="work-experience.html">Work Experience</a></li>
+    <li><a href="achievements.html">Achievements</a></li>
+    <li><a href="certifications.html">Certifications</a></li>
+    <li><a href="research.html">Research</a></li>
+  </ul>
+   <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Toggle dark/light mode">
+    <span class="theme-toggle-icon" id="icon-light">☀️</span>
+    <span class="theme-toggle-icon" id="icon-dark">🌙</span>
+  </button>
+</nav>
+
+<main class="page">
+
+  <div class="page-header">
+    <div class="page-eyebrow">Projects / Academic</div>
+    <div class="page-title">Academic Projects</div>
+    <div class="page-sub">Design, analysis, and mechatronics projects spanning automotive dynamics, robotics, and precision manufacturing.</div>
+  </div>
+
+  <!-- ── PROJECT 1 — Axle ── -->
+  <div class="project-card">
+    <div class="project-header">
+      <div class="project-title">Dynamic Analysis of Automotive Front Transmission Axle</div>
+      <div class="project-rank green">ICAPSM 2024</div>
+    </div>
+    <div class="project-date">Final Year Project &nbsp;·&nbsp; Presented at ICAPSM 2024</div>
+
+    <div class="carousel" id="c-axle"></div>
+
+    <p class="project-obj">
+      Comprehensive FEA and rotordynamic study of a front transmission shaft axle to identify critical
+      speeds, assess vibrational mode stability, and enhance dynamic response by integrating hybrid
+      bearing technologies.
+    </p>
+    
+      <div class="tools-row">
+        
+      <span class="tool-tag">SolidWorks</span>
+      <span class="tool-tag">ANSYS Workbench</span>
+      <span class="tool-tag">Modal Analysis</span>
+      <span class="tool-tag">Campbell Diagram</span>
+      <span class="tool-tag">Bearing Calculations</span>
+      <span class="tool-tag">Rotordynamics</span>
+        
+    </div>
+    
+    <ul class="project-bullets">
+      <li><strong>Hybrid Bearings:</strong> Explored replacement of conventional angular contact ball bearings with non-contact magnetic bearings to reduce friction, energy loss, and wear.</li>
+      <li><strong>FEA &amp; Modal Analysis:</strong> SolidWorks 3D modelling + ANSYS Workbench static structural, modal analysis, and Campbell diagram stability analysis.</li>
+      <li><strong>Field Validation:</strong> Integrated field survey data from authorized service centers to address real-world bearing seal degradation and contaminant ingress failures.</li>
+      <li><strong>MAM Configuration:</strong> Magnetic-Angular-Magnetic hybrid identified as optimal — 18.38% reduction in peak mode deformation vs. conventional AAA baseline.</li>
+      <li><strong>Frequency Optimization:</strong> Operating frequencies lowered by 4.59%, resulting in improved transmission efficiency.</li>
+    </ul>
+    <a class="proj-link" href="https://www.papermark.com/view/cmmns9k390004l804e8iyvzvl" target="_blank">Full project report ↗</a>
+  </div>
+
+  <!-- ── PROJECT 2 — Cotton Robot ── -->
+  <div class="project-card">
+    <div class="project-header">
+      <div class="project-title">Cotton Picking Robot</div>
+      <div class="project-rank green">Precision Agriculture</div>
+    </div>
+    <div class="project-date">Academic Project &nbsp;·&nbsp; Design &amp; Fabrication</div>
+
+    <div class="carousel" id="c-cotton"></div>
+
+    <p class="project-obj">
+      Design and build an efficient, cost-effective semi-automatic cotton-picking robot to address
+      challenges of manual cotton harvesting — highly labour-intensive and limiting farmer profitability.
+    </p>
+    
+<div class="tools-row">
+  
+      <span class="tool-tag">SolidWorks</span>
+      <span class="tool-tag">CATIA V5</span>
+      <span class="tool-tag">ANSYS</span>
+      <span class="tool-tag">Python / YOLO V8</span>
+      <span class="tool-tag">Arduino IDE</span>
+      <span class="tool-tag">TinkerCAD</span>
+      <span class="tool-tag">Ultimaker CURA</span>
+  
+    </div>
+    
+    <ul class="project-bullets">
+      <li><strong>Machine Vision:</strong> 16 MP camera paired with YOLO V8 algorithm for real-time cotton boll detection.</li>
+      <li><strong>Adaptive Height:</strong> Scissor lift mechanism extending up to 55 cm to accommodate varying crop heights.</li>
+      <li><strong>Capacity &amp; Power:</strong> 2,583 cm³ storage volume; 10 RPM unit powered by 12V, 7Ah battery.</li>
+      <li><strong>Remote Operation:</strong> Semi-autonomous control via custom IoT mobile app with WiFi operational range.</li>
+      <li><strong>Weight Optimization:</strong> Lightweight 3D-printed PLA robotic arm and gripper to minimise energy consumption.</li>
+    </ul>
+
+    <a class="proj-link" href="https://www.papermark.com/view/cmmnqycy70001i90438n8dvkn" target="_blank">Full project report ↗</a>
+  </div>
+
+  <!-- ── PROJECT 3 — Nerf ── -->
+  <div class="project-card">
+    <div class="project-header">
+      <div class="project-title">Reverse Engineering of Nerf Blaster Gun</div>
+      <div class="project-rank green">Siemens NX</div>
+    </div>
+    <div class="project-date">Academic Project &nbsp;·&nbsp; CAD &amp; Metrology</div>
+
+    <div class="carousel" id="c-nerf"></div>
+
+    <p class="project-obj">
+      Comprehensive reverse engineering and precise 3D CAD reconstruction of a commercial Nerf blaster
+      using Siemens NX to analyze internal mechanical linkages and ergonomic design.
+    </p>
+    
+    <div class="tools-row">
+      
+      <span class="tool-tag">Siemens NX</span>
+      <span class="tool-tag">Surfacing</span>
+      <span class="tool-tag">2D Drafting</span>
+      <span class="tool-tag">Assembly Sequence</span>
+      <span class="tool-tag">3D Scanner</span>
+      <span class="tool-tag">Vernier Caliper</span>
+      
+    </div>
+    
+    <ul class="project-bullets">
+      <li><strong>Methodology:</strong> Systematic disassembly, high-precision dimension capture using vernier calipers and 3D scanner, trigger linkage mapping.</li>
+      <li><strong>Parametric Modelling:</strong> Fully parametric, feature-based solid models for plunger tube, catch spring, and tactical rails with exact dimensional accuracy.</li>
+      <li><strong>2D Drafting:</strong> Standard-compliant manufacturing drawings in NX Drafting, including Bill of Materials and assembly sequence animation.</li>
+    </ul>
+
+    <a class="proj-link" href="https://www.papermark.com/view/cmmojosbc0001l804fc6xak72" target="_blank">Full project report ↗</a>
+  </div>
+
+  <!-- ── PROJECT 4 — Jig ── -->
+  <div class="project-card">
+    <div class="project-header">
+      <div class="project-title">Jig &amp; Fixture Design for Precision Drilling</div>
+      <div class="project-rank green">Manufacturing</div>
+    </div>
+    <div class="project-date">Academic Project &nbsp;·&nbsp; Process Planning &amp; GD&amp;T</div>
+
+    <div class="carousel" id="c-jig"></div>
+
+    <p class="project-obj">
+      Design and develop a process plan for a jig facilitating the drilling of three Ø7 mm holes on a
+      shaft component, solving the challenge of precision hole location on cylindrical surfaces.
+    </p>
+
+    <div class="tools-row">
+      
+      <span class="tool-tag">SolidWorks</span>
+      <span class="tool-tag">GD&amp;T</span>
+      <span class="tool-tag">Process Planning</span>
+      <span class="tool-tag">Material Selection</span>
+      <span class="tool-tag">2D Drafting</span>
+      
+    </div>
+    
+    <ul class="project-bullets">
+      <li><strong>Functional Efficiency:</strong> 3-2-1 principle constrains all degrees of freedom — repeatable drilling within ±0.2 mm positional tolerance.</li>
+      <li><strong>Quality Assurance:</strong> Hardened OHNS jig bushes and rubber-lined lid protect N5–N7 surface finish while ensuring H7 hole accuracy.</li>
+      <li><strong>Error Prevention:</strong> Fool-proofing pins prevent incorrect shaft loading — critical for high-volume manufacturing.</li>
+      <li><strong>Standard Compliance:</strong> Adheres to ISO limits, fits, and tolerances standards throughout.</li>
+    </ul>
+
+    <a class="proj-link" href="https://www.papermark.com/view/cmmnr9swg000ojn04rv2bzwp2" target="_blank">Full project report ↗</a>
+  </div>
+
+  <!-- ── PROJECT 5 — Cleaning Robot ── -->
+  <div class="project-card">
+    <div class="project-header">
+      <div class="project-title">Autonomous Multi-Functional Cleaning Robot</div>
+      <div class="project-rank green">Mechatronics</div>
+    </div>
+    <div class="project-date">Academic Project &nbsp;·&nbsp; Design &amp; Fabrication</div>
+
+    <div class="carousel" id="c-robot"></div>
+
+    <p class="project-obj">
+      Design and fabricate a cost-effective autonomous mechatronic floor-cleaning robot capable of
+      simultaneous dry vacuuming and wet mopping using Arduino-based control and ultrasonic obstacle avoidance.
+    </p>
+
+    <div class="tools-row">
+      
+      <span class="tool-tag">SolidWorks</span>
+      <span class="tool-tag">Arduino IDE</span>
+      <span class="tool-tag">TinkerCAD</span>
+      <span class="tool-tag">C++</span>
+      <span class="tool-tag">Bluetooth IoT</span>
+      <span class="tool-tag">Motor Sizing</span>
+      
+    </div>
+    
+    <ul class="project-bullets">
+      <li><strong>Drive System:</strong> Omni-directional, differential-drive platform driven by custom C++ obstacle-avoidance algorithms.</li>
+      <li><strong>Actuation:</strong> Four 60 RPM DC motors from rigorous torque and incline calculations — 1.5 N·m per wheel.</li>
+      <li><strong>Cleaning System:</strong> Localised pneumatic suction combined with 12V submersible pump for dual-action cleaning.</li>
+      <li><strong>Result:</strong> 15W power consumption profile; prototype manufacturing cost reduced by over 90% vs. commercial equivalents.</li>
+    </ul>
+
+  </div>
+
+</main>
+
+<footer>
+  amrutnuli558@gmail.com &nbsp;·&nbsp;
+  <a href="https://www.linkedin.com/in/amrut-nuli/" target="_blank">linkedin.com/in/amrut-nuli</a>
+</footer>
+
+<script src="carousel.js"></script>
+<script>
+  /* Update src paths to match your actual image file names */
+
+  createCarousel(document.getElementById('c-axle'), [
+    { src: 'images/academic/axle/01-ansys.png',          caption: 'Axle analysis — ANSYS' },
+    { src: 'images/academic/axle/02-campbell-diagram.png', caption: 'Campbell diagram — rotordynamic analysis' },
+    { src: 'images/academic/axle/03-bearing-calc.png',   caption: 'Bearing calculations' },
+  ]);
+
+  createCarousel(document.getElementById('c-cotton'), [
+    { src: 'images/academic/cotton-robot/01-prototype.png', caption: 'Cotton picking robot prototype' },
+    { src: 'images/academic/cotton-robot/02-cad-model.jpg', caption: 'CAD model — CATIA V5' },
+    { src: 'images/academic/cotton-robot/03-ansys.png',     caption: 'Structural analysis — ANSYS' },
+    { src: 'images/academic/cotton-robot/04-detection.png', caption: 'Cotton detection — YOLO V8' },
+    { src: 'images/academic/cotton-robot/05-bom.png',       caption: 'Bill of materials &amp; 2D assembly draft' },
+  ]);
+
+  createCarousel(document.getElementById('c-nerf'), [
+    { src: 'images/academic/nerf/01-exploded-view.gif', caption: 'Exploded view assembly' },
+    { src: 'images/academic/nerf/02-2d-draft.png',      caption: '2D draft assembly — NX' },
+    { src: 'images/academic/nerf/03-cad-model.png',     caption: 'Designed in Siemens NX' },
+    { src: 'images/academic/nerf/04-render.png',        caption: 'Rendered CAD model' },
+  ]);
+
+  createCarousel(document.getElementById('c-jig'), [
+    { src: 'images/academic/jig-fixture/01-disassembly.gif', caption: 'Jig fixture disassembly — SolidWorks' },
+    { src: 'images/academic/jig-fixture/02-2d-draft.png',    caption: '2D draft' },
+    { src: 'images/academic/jig-fixture/03-cad-model.jpg',   caption: 'Designed jig &amp; fixture' },
+  ]);
+
+  createCarousel(document.getElementById('c-robot'), [
+    { src: 'images/academic/cleaning-robot/01-prototype.png', caption: 'Manufactured prototype' },
+    { src: 'images/academic/cleaning-robot/02-cad-model.jpg', caption: '3D CAD model' },
+    { src: 'images/academic/cleaning-robot/03-circuit.png',   caption: 'Electrical circuit diagram' },
+  ]);
+</script>
+  
+<script>
+  /* ── THEME TOGGLE ── */
+  function applyTheme(dark) {
+    document.body.classList.toggle('dark', dark);
+    document.getElementById('icon-light').classList.toggle('active', !dark);
+    document.getElementById('icon-dark').classList.toggle('active', dark);
+  }
+
+  function toggleTheme() {
+    const isDark = document.body.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    applyTheme(!isDark);
+  }
+
+  /* apply saved theme immediately on page load */
+  applyTheme(localStorage.getItem('theme') === 'dark');
+</script>
+</body>
+</html>
