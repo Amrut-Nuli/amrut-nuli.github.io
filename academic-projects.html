@@ -39,7 +39,7 @@
       <div class="project-title">Dynamic Analysis of Automotive Front Transmission Axle</div>
       <div class="project-rank green">ICAPSM 2024</div>
     </div>
-    <div class="project-date">Final Year Project &nbsp;·&nbsp; Presented at ICAPSM 2024</div>
+    <div class="project-date">7th Sem Project &nbsp;·&nbsp; Presented at ICAPSM 2024</div>
 
     <div class="carousel" id="c-axle"></div>
 
@@ -98,9 +98,10 @@
     </div>
     
     <ul class="project-bullets">
+       <li><strong>Drive Sizing:</strong>  4WD gear-motor configuration; each wheel requires 0.288 N·m torque against field terrain rolling resistance and 5° grade — met by 10 RPM DC gear motors.</li>
       <li><strong>Machine Vision:</strong> 16 MP camera paired with YOLO V8 algorithm for real-time cotton boll detection.</li>
-      <li><strong>Adaptive Height:</strong> Scissor lift mechanism extending up to 55 cm to accommodate varying crop heights.</li>
-      <li><strong>Capacity &amp; Power:</strong> 2,583 cm³ storage volume; 10 RPM unit powered by 12V, 7Ah battery.</li>
+      <li><strong>Adaptive Height:</strong> 4-stage linkage delivering 207–773 mm lift stroke (566 mm range); lead-screw actuated at 56.6 N design force with FOS 1.5.</li>
+      <li><strong>Power & Capacity:</strong> Full system draw of 38.5 W at 12V; peak stall current of 14.95 A — sized for 12V 10 Ah LiPo with 15C discharge rating.2,583 cm³ storage volume.</li>
       <li><strong>Remote Operation:</strong> Semi-autonomous control via custom IoT mobile app with WiFi operational range.</li>
       <li><strong>Weight Optimization:</strong> Lightweight 3D-printed PLA robotic arm and gripper to minimise energy consumption.</li>
     </ul>
@@ -232,10 +233,13 @@
 
   createCarousel(document.getElementById('c-cotton'), [
     { src: 'images/academic/cotton-robot/01-prototype.png', caption: 'Cotton picking robot prototype' },
-    { src: 'images/academic/cotton-robot/02-cad-model.jpg', caption: 'CAD model — CATIA V5' },
-    { src: 'images/academic/cotton-robot/03-ansys.png',     caption: 'Structural analysis — ANSYS' },
-    { src: 'images/academic/cotton-robot/04-detection.png', caption: 'Cotton detection — YOLO V8' },
-    { src: 'images/academic/cotton-robot/05-bom.png',       caption: 'Bill of materials &amp; 2D assembly draft' },
+    { src: 'images/academic/cotton-robot/02-scissor.jpg', caption: 'Scissor Lift Kinematic diagram' },
+    { src: 'images/academic/cotton-robot/03-kinematic.jpg', caption: 'kinematics,Forces and Power Analysis' },
+    { src: 'images/academic/cotton-robot/04-robotic.jpg', caption: 'Robotic arm Analysis' },
+    { src: 'images/academic/cotton-robot/05-cad-model.jpg', caption: 'CAD model — CATIA V5' },
+    { src: 'images/academic/cotton-robot/06-ansys.png',     caption: 'Structural analysis — ANSYS' },
+    { src: 'images/academic/cotton-robot/07-detection.png', caption: 'Cotton detection — YOLO V8' },
+    { src: 'images/academic/cotton-robot/08-bom.png',       caption: 'Bill of materials &amp; 2D assembly draft' },
   ]);
 
   createCarousel(document.getElementById('c-nerf'), [
