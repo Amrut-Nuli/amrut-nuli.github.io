@@ -4,7 +4,7 @@
   AUTO-ADVANCE SPEED: change the number below (milliseconds)
   1500 = 1.5 seconds, 2000 = 2 seconds, 3000 = 3 seconds
 */
-var AUTOPLAY_DELAY = 3000;
+var AUTOPLAY_DELAY = 5000;
 
 function createCarousel(container, slides) {
   if (!container) return;
