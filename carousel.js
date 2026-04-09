@@ -1,89 +1,10 @@
 /*
-  carousel.js
-  ──────────────────────────────────────────────────────────────
-  Usage:  createCarousel(containerEl, slidesArray)
-
-  slidesArray = [
-    { src: "images/sae2022/cad.jpg", caption: "CAD model" },
-    ...
-  ]
-
-  IMAGE FOLDER STRUCTURE TO CREATE:
-  ───────────────────────────────────
-  images/
-    profile/
-      photo.jpg               ← your profile photo
-    sae2022/
-      01-cad-model.jpg
-      02-manufactured.jpg
-      03-cfd.jpg
-      04-ansys.jpg
-      05-flight.jpg
-    aerothon2022/
-      01-uav-specs.jpg
-      02-payload-mechanism.jpg
-      03-ansys.jpg
-      04-prototype.jpg
-    aerothon2023/
-      01-cad-model.jpg
-      02-uav-specs.jpg
-      03-mission-profile.jpg
-      04-payload.jpg
-      05-cfd.jpg
-      06-prototype.jpg
-    academic/
-      axle/
-        01-axle-ansys.jpg
-        02-campbell-diagram.jpg
-        03-bearing-calc.jpg
-      cotton-robot/
-        01-prototype.jpg
-        02-cad-model.jpg
-        03-ansys.jpg
-        04-detection.jpg
-        05-bom.jpg
-      nerf/
-        01-exploded-view.jpg
-        02-2d-draft.jpg
-        03-cad-model.jpg
-        04-render.jpg
-      jig-fixture/
-        01-disassembly.jpg
-        02-2d-draft.jpg
-        03-cad-model.jpg
-      cleaning-robot/
-        01-prototype.jpg
-        02-cad-model.jpg
-        03-circuit.jpg
-    achievements/
-      sae2022/
-        01-team.jpg
-        02-certificate.jpg
-        03-aircraft.jpg
-      addc2023/
-        01-team.jpg
-        02-certificate.jpg
-        03-cad-model.jpg
-      aerothon2023/
-        01-team.jpg
-        02-prototype.jpg
-        03-certificate.jpg
-    certifications/
-      nx-essentials.jpg
-      nx-advanced.jpg
-      cswa.jpg
-      cswa-am.jpg
-      autocad.jpg
-      gdt.jpg
-      ansys-topo.jpg
-      cfd-iit.jpg
-      automotive-iit.jpg
-      python.jpg
-      aircraft-workshop.jpg
-      defence-workshop.jpg
-    research/
-      presentation.jpg        ← photo of you presenting / paper first page
+  carousel.js — image carousel with auto-advance
+  ─────────────────────────────────────────────────────────────
+  AUTO-ADVANCE SPEED: change the number below (milliseconds)
+  1500 = 1.5 seconds, 2000 = 2 seconds, 3000 = 3 seconds
 */
+var AUTOPLAY_DELAY = 1500;
 
 function createCarousel(container, slides) {
   if (!container) return;
@@ -102,39 +23,41 @@ function createCarousel(container, slides) {
     return;
   }
 
-  let current = 0;
-  const total = slides.length;
+  var current = 0;
+  var total = slides.length;
+  var autoTimer = null;
+  var progressTimer = null;
 
-  /* track */
-  const trackWrap = document.createElement('div');
+  /* ── track ── */
+  var trackWrap = document.createElement('div');
   trackWrap.className = 'carousel-track-wrap';
-  const track = document.createElement('div');
+  var track = document.createElement('div');
   track.className = 'carousel-track';
 
-  slides.forEach(slide => {
-    const s = document.createElement('div');
+  slides.forEach(function(slide) {
+    var s = document.createElement('div');
     s.className = 'carousel-slide';
-    const img = document.createElement('img');
+    var img = document.createElement('img');
     img.src = slide.src;
     img.alt = slide.caption || '';
     img.loading = 'lazy';
-    /* graceful fallback if image missing */
     img.onerror = function() {
       this.style.display = 'none';
-      const fb = document.createElement('div');
+      var fb = document.createElement('div');
       fb.className = 'carousel-placeholder';
-      fb.style.height = '250px';
-      fb.innerHTML = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="1.5" style="opacity:0.35">
-        <rect x="3" y="3" width="18" height="18" rx="2"/>
-        <circle cx="8.5" cy="8.5" r="1.5"/>
-        <path d="M21 15l-5-5L5 21"/></svg>
+      fb.innerHTML = `
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.5" style="opacity:0.35">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <path d="M21 15l-5-5L5 21"/>
+        </svg>
         <span>${slide.caption || 'Image not found'}</span>`;
       s.insertBefore(fb, s.firstChild);
     };
     s.appendChild(img);
     if (slide.caption) {
-      const cap = document.createElement('div');
+      var cap = document.createElement('div');
       cap.className = 'carousel-caption';
       cap.textContent = slide.caption;
       s.appendChild(cap);
@@ -145,62 +68,136 @@ function createCarousel(container, slides) {
   trackWrap.appendChild(track);
   container.appendChild(trackWrap);
 
-  /* counter */
-  const counter = document.createElement('div');
+  /* ── counter ── */
+  var counter = document.createElement('div');
   counter.className = 'carousel-counter';
-  counter.textContent = `1 / ${total}`;
+  counter.textContent = '1 / ' + total;
   container.appendChild(counter);
 
+  /* ── progress bar ── */
+  var progressWrap = document.createElement('div');
+  progressWrap.className = 'carousel-progress';
+  var progressBar = document.createElement('div');
+  progressBar.className = 'carousel-progress-bar';
+  progressWrap.appendChild(progressBar);
+  container.appendChild(progressWrap);
+
+  var dots = [];
+
+  /* ── go to slide ── */
   function goTo(n) {
     current = ((n % total) + total) % total;
-    track.style.transform = `translateX(-${current * 100}%)`;
-    counter.textContent = `${current + 1} / ${total}`;
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    counter.textContent = (current + 1) + ' / ' + total;
+    dots.forEach(function(d, i) {
+      d.classList.toggle('active', i === current);
+    });
+    resetProgress();
   }
 
-  const dots = [];
+  /* ── progress bar animation ── */
+  function resetProgress() {
+    progressBar.style.transition = 'none';
+    progressBar.style.width = '0%';
+    /* force reflow */
+    progressBar.offsetWidth;
+    progressBar.style.transition = 'width ' + AUTOPLAY_DELAY + 'ms linear';
+    progressBar.style.width = '100%';
+  }
+
+  /* ── autoplay ── */
+  function startAuto() {
+    stopAuto();
+    resetProgress();
+    autoTimer = setInterval(function() {
+      goTo(current + 1);
+    }, AUTOPLAY_DELAY);
+  }
+
+  function stopAuto() {
+    clearInterval(autoTimer);
+    clearTimeout(progressTimer);
+    progressBar.style.transition = 'none';
+    progressBar.style.width = '0%';
+  }
+
+  function resumeAuto() {
+    /* restart after manual interaction with short delay */
+    progressTimer = setTimeout(function() {
+      startAuto();
+    }, 800);
+  }
 
   if (total > 1) {
-    /* prev / next */
-    const prev = document.createElement('button');
+    /* ── prev / next buttons ── */
+    var prev = document.createElement('button');
     prev.className = 'carousel-btn prev';
     prev.setAttribute('aria-label', 'Previous');
     prev.innerHTML = '&#8592;';
-    const next = document.createElement('button');
+
+    var next = document.createElement('button');
     next.className = 'carousel-btn next';
     next.setAttribute('aria-label', 'Next');
     next.innerHTML = '&#8594;';
+
     container.appendChild(prev);
     container.appendChild(next);
-    prev.addEventListener('click', () => goTo(current - 1));
-    next.addEventListener('click', () => goTo(current + 1));
 
-    /* dots */
-    const dotsEl = document.createElement('div');
+    prev.addEventListener('click', function() {
+      stopAuto();
+      goTo(current - 1);
+      resumeAuto();
+    });
+
+    next.addEventListener('click', function() {
+      stopAuto();
+      goTo(current + 1);
+      resumeAuto();
+    });
+
+    /* ── dots ── */
+    var dotsEl = document.createElement('div');
     dotsEl.className = 'carousel-dots';
-    for (let i = 0; i < total; i++) {
-      const d = document.createElement('button');
-      d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-      d.setAttribute('aria-label', `Slide ${i + 1}`);
-      d.addEventListener('click', () => goTo(i));
-      dotsEl.appendChild(d);
-      dots.push(d);
+    for (var i = 0; i < total; i++) {
+      (function(idx) {
+        var d = document.createElement('button');
+        d.className = 'carousel-dot' + (idx === 0 ? ' active' : '');
+        d.setAttribute('aria-label', 'Slide ' + (idx + 1));
+        d.addEventListener('click', function() {
+          stopAuto();
+          goTo(idx);
+          resumeAuto();
+        });
+        dotsEl.appendChild(d);
+        dots.push(d);
+      })(i);
     }
     container.appendChild(dotsEl);
 
-    /* swipe */
-    let startX = 0;
-    container.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-    container.addEventListener('touchend', e => {
-      const diff = startX - e.changedTouches[0].clientX;
+    /* ── swipe ── */
+    var startX = 0;
+    container.addEventListener('touchstart', function(e) {
+      startX = e.touches[0].clientX;
+      stopAuto();
+    }, { passive: true });
+    container.addEventListener('touchend', function(e) {
+      var diff = startX - e.changedTouches[0].clientX;
       if (Math.abs(diff) > 40) goTo(current + (diff > 0 ? 1 : -1));
+      resumeAuto();
     }, { passive: true });
 
-    /* keyboard when focused */
+    /* ── keyboard ── */
     container.setAttribute('tabindex', '0');
-    container.addEventListener('keydown', e => {
-      if (e.key === 'ArrowLeft')  goTo(current - 1);
-      if (e.key === 'ArrowRight') goTo(current + 1);
+    container.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowLeft')  { stopAuto(); goTo(current - 1); resumeAuto(); }
+      if (e.key === 'ArrowRight') { stopAuto(); goTo(current + 1); resumeAuto(); }
     });
+
+    /* ── pause on hover ── */
+    container.addEventListener('mouseenter', function() { stopAuto(); });
+    container.addEventListener('mouseleave', function() { resumeAuto(); });
+
+    /* ── start autoplay ── */
+    startAuto();
   }
 }
