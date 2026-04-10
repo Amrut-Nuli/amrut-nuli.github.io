@@ -192,12 +192,48 @@ function createCarousel(container, slides) {
       if (e.key === 'ArrowLeft')  { stopAuto(); goTo(current - 1); resumeAuto(); }
       if (e.key === 'ArrowRight') { stopAuto(); goTo(current + 1); resumeAuto(); }
     });
-
-    /* ── pause on hover ── */
+/* ── pause on hover ── */
     container.addEventListener('mouseenter', function() { stopAuto(); });
-    container.addEventListener('mouseleave', function() { resumeAuto(); });
+    container.addEventListener('mouseleave', function() {
+      if (!container.dataset.clicked) resumeAuto();
+    });
+
+    /* ── click on image to toggle pause ── */
+    var clickLock = false;
+    trackWrap.addEventListener('click', function() {
+      clickLock = !clickLock;
+      if (clickLock) {
+        stopAuto();
+        container.dataset.clicked = 'true';
+        /* show paused indicator */
+        counter.textContent = '⏸ ' + (current + 1) + ' / ' + total;
+        container.style.cursor = 'pointer';
+        progressBar.style.transition = 'none';
+        progressBar.style.width = '0%';
+      } else {
+        delete container.dataset.clicked;
+        counter.textContent = (current + 1) + ' / ' + total;
+        startAuto();
+      }
+    });
+
+    /* keep counter text correct after goTo when paused */
+    var _origGoTo = goTo;
+    /* patch dots click to also respect pause state */
+    dots.forEach(function(d, idx) {
+      d.addEventListener('click', function(e) {
+        e.stopPropagation();
+        stopAuto();
+        goTo(idx);
+        if (!clickLock) resumeAuto();
+        if (clickLock) {
+          counter.textContent = '⏸ ' + (current + 1) + ' / ' + total;
+        }
+      });
+    });
 
     /* ── start autoplay ── */
     startAuto();
+ 
   }
 }
