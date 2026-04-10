@@ -5,6 +5,187 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Work Experience — Amrut Nuli</title>
   <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* ── TIMELINE ── */
+    .timeline {
+      position: relative;
+      padding-left: 52px;
+      margin-top: 8px;
+    }
+
+    /* vertical line */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 16px;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom,
+        var(--accent) 0%,
+        var(--accent-border) 60%,
+        var(--border) 100%);
+      border-radius: 2px;
+    }
+
+    /* each entry */
+    .timeline-entry {
+      position: relative;
+      margin-bottom: 40px;
+    }
+    .timeline-entry:last-child { margin-bottom: 0; }
+
+    /* node circle */
+    .timeline-node {
+      position: absolute;
+      left: -44px;
+      top: 18px;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--bg);
+      box-shadow: 0 0 0 2px var(--accent);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      z-index: 2;
+    }
+    .timeline-node:hover {
+      transform: scale(1.3);
+      box-shadow: 0 0 0 4px var(--accent-border);
+    }
+    .timeline-node.intern {
+      background: var(--green);
+      box-shadow: 0 0 0 2px var(--green);
+    }
+    .timeline-node.intern:hover {
+      box-shadow: 0 0 0 4px var(--green-border);
+    }
+
+    /* date label beside node */
+    .timeline-date-pin {
+      position: absolute;
+      left: -120px;
+      top: 14px;
+      width: 68px;
+      text-align: right;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--text3);
+      line-height: 1.4;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .timeline-date-pin:hover { color: var(--accent); }
+
+    /* connector line from node to card */
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -26px;
+      top: 26px;
+      width: 26px;
+      height: 1px;
+      background: var(--border2);
+    }
+
+    /* card content */
+    .timeline-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .timeline-card:hover {
+      border-color: var(--accent-border);
+      box-shadow: 0 2px 20px rgba(26,86,219,0.07);
+    }
+
+    /* duration badge */
+    .duration-badge {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 10.5px;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-border);
+      border-radius: 20px;
+      padding: 3px 10px;
+      margin-bottom: 14px;
+    }
+    .duration-badge.green {
+      color: var(--green);
+      background: var(--green-dim);
+      border-color: var(--green-border);
+    }
+
+    /* company header */
+    .tl-company {
+      font-family: 'Syne', sans-serif;
+      font-size: 20px; font-weight: 700;
+      color: var(--text); text-decoration: none;
+      display: inline-block;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+    .tl-company:hover { border-color: var(--text3); }
+
+    .tl-role {
+      font-size: 14.5px; color: var(--accent);
+      margin: 5px 0 3px; font-weight: 500;
+    }
+    .tl-role.green { color: var(--green); }
+
+    .tl-location {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; color: var(--text3);
+      margin-bottom: 20px;
+    }
+
+    /* STAR block */
+    .star-grid {
+      display: grid; gap: 14px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .star-label {
+      font-size: 10.5px; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--text3);
+      font-family: 'DM Mono', monospace; margin-bottom: 4px;
+    }
+    .star-text {
+      font-size: 14px; color: var(--text2); line-height: 1.75;
+    }
+
+    /* connecting line between two entries */
+    .timeline-gap {
+      position: relative;
+      margin-left: -36px;
+      padding-left: 36px;
+      margin-bottom: 8px;
+    }
+    .timeline-gap-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; color: var(--text3);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      display: inline-block;
+      margin-left: 8px;
+    }
+
+    @media (max-width: 620px) {
+      .timeline { padding-left: 28px; }
+      .timeline-date-pin { display: none; }
+      .timeline-node { left: -22px; }
+      .timeline-entry::before { width: 10px; left: -10px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -19,7 +200,7 @@
     <li><a href="certifications.html">Certifications</a></li>
     <li><a href="research.html">Research</a></li>
   </ul>
-   <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Toggle dark/light mode">
+  <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Toggle dark/light mode">
     <span class="theme-toggle-icon" id="icon-light">☀️</span>
     <span class="theme-toggle-icon" id="icon-dark">🌙</span>
   </button>
@@ -33,82 +214,124 @@
     <div class="page-sub">1 year of industry R&amp;D in automotive product design at Daimler Truck Innovation Center India.</div>
   </div>
 
-  <!-- Role 1 -->
-  <div class="exp-card">
-    <a class="exp-company" href="https://dtici.daimlertruck.com/" target="_blank">Daimler Truck Innovation Center India ↗</a>
-    <div class="exp-role">Graduate Engineer Trainee — Product Design</div>
-    <div class="exp-period">Aug 2024 – Jun 2025 &nbsp;·&nbsp; Bengaluru, India</div>
+  <div class="timeline">
 
-    <div class="skills-gained">
-      <div class="skills-gained-label">Skills gained</div>
-      <div class="pill-row">
-        <span class="pill">NX Electrical Routing</span>
-        <span class="pill">Siemens Teamcenter</span>
-        <span class="pill">Smaragd PDM</span>
-        <span class="pill">Release Preparation</span>
-        <span class="pill">Variant Optimization</span>
-        <span class="pill">Zone Classification</span>
-        <span class="pill">DMU</span>
+    <!-- ── ENTRY 1 — Graduate Engineer Trainee ── -->
+    <div class="timeline-entry" id="entry-get">
+
+      <div class="timeline-date-pin" onclick="document.getElementById('entry-get').scrollIntoView({behavior:'smooth'})">
+        Aug 2024<br/>Jun 2025
+      </div>
+
+      <div class="timeline-node" title="Graduate Engineer Trainee"
+           onclick="document.getElementById('entry-get').scrollIntoView({behavior:'smooth'})">
+      </div>
+
+      <div class="timeline-card">
+
+        <div class="duration-badge">Aug 2024 – Jun 2025 &nbsp;·&nbsp; 11 months</div>
+
+        <a class="tl-company" href="https://dtici.daimlertruck.com/" target="_blank">
+          Daimler Truck Innovation Center India ↗
+        </a>
+        <div class="tl-role">Graduate Engineer Trainee — Product Design</div>
+        <div class="tl-location">Bengaluru, India &nbsp;·&nbsp; Full-time</div>
+
+        <div class="skills-gained">
+          <div class="skills-gained-label">Skills gained</div>
+          <div class="pill-row">
+            <span class="pill">NX Electrical Routing</span>
+            <span class="pill">Siemens Teamcenter</span>
+            <span class="pill">Smaragd PDM</span>
+            <span class="pill">Release Preparation</span>
+            <span class="pill">Variant Optimization</span>
+            <span class="pill">Zone Classification</span>
+            <span class="pill">DMU</span>
+          </div>
+        </div>
+
+        <ul class="project-bullets">
+          <li>Engineered and validated low-voltage (LV) electrical harness routing and packaging for commercial vehicle chassis using Siemens NX Electrical Routing, ensuring compliance with OEM engineering standards.</li>
+          <li>Utilized Siemens Teamcenter (TcE) for product data management — rigorous checks of product structures and supporting end-to-end release workflows in a global, cross-functional environment.</li>
+          <li>Developed Zone Classification and Configuration Matrices to standardize component packaging across 10+ vehicle variant projects, directly improving accuracy of the Engineering Bill of Materials.</li>
+          <li>Spearheaded a modular sub-harness design approach to eliminate redundant branches, using length variant optimization and Digital Mock-Ups (DMU) to drastically reduce unique part numbers.</li>
+          <li>Collaborated with cross-functional design teams to establish standardized harness layouts for both Left-Hand Drive (LHD) and Right-Hand Drive (RHD) platforms.</li>
+        </ul>
+
       </div>
     </div>
 
-    <ul class="project-bullets">
-      <li>Engineered and validated low-voltage (LV) electrical harness routing and packaging for commercial vehicle chassis using Siemens NX Electrical Routing, ensuring compliance with OEM engineering standards.</li>
-      <li>Utilized Siemens Teamcenter (TcE) for product data management — rigorous checks of product structures and supporting end-to-end release workflows in a global, cross-functional environment.</li>
-      <li>Developed Zone Classification and Configuration Matrices to standardize component packaging across 10+ vehicle variant projects, directly improving accuracy of the Engineering Bill of Materials.</li>
-      <li>Spearheaded a modular sub-harness design approach to eliminate redundant branches, using length variant optimization and Digital Mock-Ups (DMU) to drastically reduce unique part numbers.</li>
-      <li>Collaborated with cross-functional design teams to establish standardized harness layouts for both Left-Hand Drive (LHD) and Right-Hand Drive (RHD) platforms.</li>
-    </ul>
+    <!-- ── GAP LABEL between roles ── -->
+    <div style="position:relative; margin-bottom:16px; margin-top:-16px;">
+      <span class="timeline-gap-label">↑ Converted to full-time from internship</span>
+    </div>
+
+    <!-- ── ENTRY 2 — Internship ── -->
+    <div class="timeline-entry" id="entry-intern">
+
+      <div class="timeline-date-pin" onclick="document.getElementById('entry-intern').scrollIntoView({behavior:'smooth'})">
+        Feb 2024<br/>Jul 2024
+      </div>
+
+      <div class="timeline-node intern" title="Engineering Intern"
+           onclick="document.getElementById('entry-intern').scrollIntoView({behavior:'smooth'})">
+      </div>
+
+      <div class="timeline-card">
+
+        <div class="duration-badge green">Feb 2024 – Jul 2024 &nbsp;·&nbsp; 6 months</div>
+
+        <a class="tl-company" href="https://dtici.daimlertruck.com/" target="_blank">
+          Daimler Truck Innovation Center India ↗
+        </a>
+        <div class="tl-role green">Engineering Intern — Quality &amp; Product Development</div>
+        <div class="tl-location">Bengaluru, India &nbsp;·&nbsp; Internship</div>
+
+        <div class="skills-gained">
+          <div class="skills-gained-label">Skills gained</div>
+          <div class="pill-row">
+            <span class="pill">Quality Management</span>
+            <span class="pill">Quality Gates</span>
+            <span class="pill">Drawing Validation</span>
+            <span class="pill">Material Standards</span>
+            <span class="pill">Automotive Systems</span>
+            <span class="pill">DFMA</span>
+          </div>
+        </div>
+
+        <ul class="project-bullets">
+          <li>Supported creation of configuration matrices to standardize component positioning across multiple vehicle variants.</li>
+          <li>Validated and audited manufacturing drawings against OEM component drawings, ensuring quality and compliance.</li>
+          <li>Collaborated with cross-functional teams to establish standardized harness layouts for chassis variants.</li>
+        </ul>
+
+        <hr class="hr-sm"/>
+
+        <div class="label">Internship Project — Emergency Door Unlocking System</div>
+        <div class="star-grid">
+          <div>
+            <div class="star-label">Situation</div>
+            <div class="star-text">Identified a need to enhance post-collision passenger safety mechanisms in the Mercedes-Benz Actros cabin.</div>
+          </div>
+          <div>
+            <div class="star-label">Task</div>
+            <div class="star-text">Analyzed the cabin door electrical architecture and proposed a fail-safe unlocking feature compliant with automotive safety standards.</div>
+          </div>
+          <div>
+            <div class="star-label">Action</div>
+            <div class="star-text">Designed a logic architecture for an Emergency Door Unlocking System utilizing CAN-bus telemetry to detect collision signatures. All harness components complied with DIN 72551 and DIN 72552 standards.</div>
+          </div>
+          <div>
+            <div class="star-label">Result</div>
+            <div class="star-text">Proposed logic provided a redundant safety layer ensuring door operability during partial electrical failure. Documented the complete assembly process from wire cutting (EDM) to ultrasonic welding.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
-
-  <!-- Role 2 -->
-  <div class="exp-card">
-    <a class="exp-company" href="https://dtici.daimlertruck.com/" target="_blank">Daimler Truck Innovation Center India ↗</a>
-    <div class="exp-role">Engineering Intern — Quality &amp; Product Development</div>
-    <div class="exp-period">Feb 2024 – Jul 2024 &nbsp;·&nbsp; Bengaluru, India</div>
-
-    <div class="skills-gained">
-      <div class="skills-gained-label">Skills gained</div>
-      <div class="pill-row">
-        <span class="pill">Quality Management</span>
-        <span class="pill">Quality Gates</span>
-        <span class="pill">Drawing Validation</span>
-        <span class="pill">Material Standards</span>
-        <span class="pill">Automotive Systems</span>
-        <span class="pill">DFMA</span>
-      </div>
-    </div>
-
-    <ul class="project-bullets">
-      <li>Supported creation of configuration matrices to standardize component positioning across multiple vehicle variants.</li>
-      <li>Validated and audited manufacturing drawings against OEM component drawings, ensuring quality and compliance.</li>
-      <li>Collaborated with cross-functional teams to establish standardized harness layouts for chassis variants.</li>
-    </ul>
-
-    <hr class="hr-sm"/>
-
-    <div class="label">Internship Project — Emergency Door Unlocking System</div>
-    <div style="background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:20px;">
-      <div style="display:grid; gap:14px;">
-        <div>
-          <div style="font-size:10.5px; text-transform:uppercase; letter-spacing:0.1em; color:var(--text3); font-family:'DM Mono',monospace; margin-bottom:4px;">Situation</div>
-          <div style="font-size:14px; color:var(--text2); line-height:1.75;">Identified a need to enhance post-collision passenger safety mechanisms in the Mercedes-Benz Actros cabin.</div>
-        </div>
-        <div>
-          <div style="font-size:10.5px; text-transform:uppercase; letter-spacing:0.1em; color:var(--text3); font-family:'DM Mono',monospace; margin-bottom:4px;">Task</div>
-          <div style="font-size:14px; color:var(--text2); line-height:1.75;">Analyzed the cabin door electrical architecture and proposed a fail-safe unlocking feature compliant with automotive safety standards.</div>
-        </div>
-        <div>
-          <div style="font-size:10.5px; text-transform:uppercase; letter-spacing:0.1em; color:var(--text3); font-family:'DM Mono',monospace; margin-bottom:4px;">Action</div>
-          <div style="font-size:14px; color:var(--text2); line-height:1.75;">Designed a logic architecture for an Emergency Door Unlocking System utilizing CAN-bus telemetry to detect collision signatures. All harness components complied with DIN 72551 and DIN 72552 standards.</div>
-        </div>
-        <div>
-          <div style="font-size:10.5px; text-transform:uppercase; letter-spacing:0.1em; color:var(--text3); font-family:'DM Mono',monospace; margin-bottom:4px;">Result</div>
-          <div style="font-size:14px; color:var(--text2); line-height:1.75;">Proposed logic provided a redundant safety layer ensuring door operability during partial electrical failure. Documented the complete assembly process from wire cutting (EDM) to ultrasonic welding.</div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- end timeline -->
 
 </main>
 
@@ -116,23 +339,24 @@
   amrutnuli558@gmail.com &nbsp;·&nbsp;
   <a href="https://www.linkedin.com/in/amrut-nuli/" target="_blank">linkedin.com/in/amrut-nuli</a>
 </footer>
-  
+
 <script>
-  /* ── THEME TOGGLE ── */
   function applyTheme(dark) {
     document.body.classList.toggle('dark', dark);
     document.getElementById('icon-light').classList.toggle('active', !dark);
     document.getElementById('icon-dark').classList.toggle('active', dark);
   }
-
   function toggleTheme() {
     const isDark = document.body.classList.contains('dark');
     localStorage.setItem('theme', isDark ? 'light' : 'dark');
     applyTheme(!isDark);
   }
-
-  /* apply saved theme immediately on page load */
-  applyTheme(localStorage.getItem('theme') === 'dark');
+  (function() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark') applyTheme(true);
+    else applyTheme(false);
+  })();
 </script>
+
 </body>
 </html>
