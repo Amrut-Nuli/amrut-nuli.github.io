@@ -150,28 +150,48 @@
 <!-- ── HIGHLIGHTS ── -->
   <div class="label">Highlights</div>
   <div class="stats-grid" id="stats-grid">
-    <div class="stat-card">
+
+    <!-- Card 1: SAE ADC 2022 — Lift/Drag curve -->
+    <div class="stat-card" id="hud-adc">
+      <canvas id="canvas-adc"></canvas>
+      <span class="hud-label">L/D · payload</span>
       <div class="stat-val" data-target="1" data-prefix="AIR ">AIR —</div>
       <div class="stat-desc">SAE Aero Design Challenge 2022</div>
     </div>
-    <div class="stat-card">
+
+    <!-- Card 2: ADDC 2023 — Quadcopter rotor pulse -->
+    <div class="stat-card" id="hud-addc">
+      <canvas id="canvas-addc"></canvas>
+      <span class="hud-label">rotor · thrust</span>
       <div class="stat-val" data-target="2" data-prefix="AIR ">AIR —</div>
       <div class="stat-desc">SAE ADDC 2023</div>
     </div>
-    <div class="stat-card">
+
+    <!-- Card 3: Aerothon 2023 — Mission trajectory -->
+    <div class="stat-card" id="hud-aerothon">
+      <canvas id="canvas-aerothon"></canvas>
+      <span class="hud-label">mission · path</span>
       <div class="stat-val" data-target="4" data-prefix="AIR ">AIR —</div>
       <div class="stat-desc">SAE Aerothon 2023</div>
     </div>
-    <div class="stat-card">
+
+    <!-- Card 4: Daimler — Wiring harness schematic -->
+    <div class="stat-card" id="hud-daimler">
+      <canvas id="canvas-daimler"></canvas>
+      <span class="hud-label">harness · variants</span>
       <div class="stat-val" data-target="1" data-prefix="" data-suffix=" yr">— yr</div>
       <div class="stat-desc">Industry R&amp;D — Daimler Truck Innovation Center India</div>
     </div>
-    <div class="stat-card">
+
+    <!-- Card 5: Gold Medal — Rank waveform -->
+    <div class="stat-card" id="hud-medal">
+      <canvas id="canvas-medal"></canvas>
+      <span class="hud-label">batch · rank</span>
       <div class="stat-val" data-text="Gold Medal">—</div>
       <div class="stat-desc">Mech. Engg. batch of 2024 — KLE Tech University</div>
     </div>
-  </div>
 
+  </div>
   <hr/>
 
   <!-- ── SKILLS ── -->
@@ -354,4 +374,540 @@
     window.addEventListener('scroll', animateCounters, { passive: true });
     setTimeout(animateCounters, 300);
   })();
+  /* ══════════════════════════════════════════
+     TELEMETRY HUD CANVAS ANIMATIONS
+  ══════════════════════════════════════════ */
+  (function() {
+
+    var isDark = function() {
+      return document.body.classList.contains('dark');
+    };
+    var C = function(hex, a) {
+      /* convert hex to rgba */
+      var r = parseInt(hex.slice(1,3),16);
+      var g = parseInt(hex.slice(3,5),16);
+      var b = parseInt(hex.slice(5,7),16);
+      return 'rgba('+r+','+g+','+b+','+(a||1)+')';
+    };
+    var accentLight = '#1a56db';
+    var accentDark  = '#4a9eff';
+    var greenLight  = '#059669';
+    var greenDark   = '#3ecf8e';
+    var getAccent = function() { return isDark() ? accentDark : accentLight; };
+    var getGreen  = function() { return isDark() ? greenDark  : greenLight; };
+
+    /* ── helper: resize canvas to match CSS size ── */
+    function sizeCanvas(c) {
+      var rect = c.parentElement.getBoundingClientRect();
+      c.width  = rect.width  || 180;
+      c.height = rect.height || 110;
+    }
+
+    /* ════════════════════════════════════
+       CARD 1 — SAE ADC: Lift/Drag curve
+    ════════════════════════════════════ */
+    (function() {
+      var card   = document.getElementById('hud-adc');
+      var canvas = document.getElementById('canvas-adc');
+      if (!card || !canvas) return;
+      var anim, prog = 0, running = false;
+
+      function draw(p) {
+        sizeCanvas(canvas);
+        var ctx = canvas.getContext('2d');
+        var W = canvas.width, H = canvas.height;
+        ctx.clearRect(0,0,W,H);
+        var acc = getAccent();
+        var grn = getGreen();
+
+        /* grid lines */
+        ctx.strokeStyle = C(acc, 0.08);
+        ctx.lineWidth = 0.5;
+        for (var i=1; i<4; i++) {
+          ctx.beginPath(); ctx.moveTo(W*i/4,0); ctx.lineTo(W*i/4,H); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(0,H*i/4); ctx.lineTo(W,H*i/4); ctx.stroke();
+        }
+
+        /* L/D curve (bell curve shape) */
+        ctx.beginPath();
+        ctx.strokeStyle = C(acc, 0.7);
+        ctx.lineWidth = 1.5;
+        var pts = Math.floor(60 * p);
+        for (var xi=0; xi<=pts; xi++) {
+          var t = xi / 60;
+          var x = W * 0.08 + t * W * 0.84;
+          /* bell peak at t=0.4 */
+          var y = H*0.85 - (H*0.65) * Math.exp(-Math.pow((t-0.4)*3.5,2));
+          if (xi===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+        }
+        ctx.stroke();
+
+        /* payload bar */
+        var barW = W * 0.55 * p;
+        ctx.fillStyle = C(grn, 0.25);
+        ctx.fillRect(W*0.08, H*0.1, barW, H*0.12);
+        ctx.strokeStyle = C(grn, 0.6);
+        ctx.lineWidth = 1;
+        ctx.strokeRect(W*0.08, H*0.1, W*0.55, H*0.12);
+
+        /* labels */
+        ctx.font = '7px DM Mono, monospace';
+        ctx.fillStyle = C(acc, 0.5);
+        ctx.fillText('L/D', W*0.08, H*0.97);
+        ctx.fillStyle = C(grn, 0.6);
+        ctx.fillText('9kg payload', W*0.08, H*0.09);
+
+        /* axis arrows */
+        ctx.strokeStyle = C(acc, 0.2);
+        ctx.lineWidth = 0.8;
+        ctx.beginPath(); ctx.moveTo(W*0.06,H*0.9); ctx.lineTo(W*0.94,H*0.9); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(W*0.06,H*0.9); ctx.lineTo(W*0.06,H*0.08); ctx.stroke();
+      }
+
+      function animate() {
+        prog += 0.022;
+        if (prog >= 1) { prog = 1; running = false; draw(prog); return; }
+        draw(prog);
+        anim = requestAnimationFrame(animate);
+      }
+
+      card.addEventListener('mouseenter', function() {
+        cancelAnimationFrame(anim);
+        prog = 0; running = true;
+        animate();
+      });
+      card.addEventListener('mouseleave', function() {
+        cancelAnimationFrame(anim);
+        running = false;
+        var ctx = canvas.getContext('2d');
+        /* fade out */
+        var fo = 1;
+        function fadeOut() {
+          sizeCanvas(canvas);
+          ctx.clearRect(0,0,canvas.width,canvas.height);
+          if (fo > 0) { draw(prog); ctx.globalAlpha = fo; fo -= 0.08; requestAnimationFrame(fadeOut); }
+          else { ctx.clearRect(0,0,canvas.width,canvas.height); ctx.globalAlpha=1; }
+        }
+        fadeOut();
+      });
+    })();
+
+    /* ════════════════════════════════════
+       CARD 2 — ADDC: Quadcopter rotors
+    ════════════════════════════════════ */
+    (function() {
+      var card   = document.getElementById('hud-addc');
+      var canvas = document.getElementById('canvas-addc');
+      if (!card || !canvas) return;
+      var anim, angle = 0, running = false;
+
+      function draw(ang) {
+        sizeCanvas(canvas);
+        var ctx = canvas.getContext('2d');
+        var W = canvas.width, H = canvas.height;
+        ctx.clearRect(0,0,W,H);
+        var acc = getAccent();
+        var grn = getGreen();
+
+        /* frame arms */
+        var cx = W/2, cy = H*0.52;
+        var armLen = Math.min(W,H)*0.28;
+        var arms = [45,135,225,315];
+        ctx.strokeStyle = C(acc, 0.25);
+        ctx.lineWidth = 1.5;
+        arms.forEach(function(a) {
+          var rad = a * Math.PI/180;
+          ctx.beginPath();
+          ctx.moveTo(cx,cy);
+          ctx.lineTo(cx + Math.cos(rad)*armLen, cy + Math.sin(rad)*armLen);
+          ctx.stroke();
+        });
+
+        /* centre body */
+        ctx.fillStyle = C(acc, 0.15);
+        ctx.beginPath(); ctx.arc(cx,cy,6,0,Math.PI*2); ctx.fill();
+        ctx.strokeStyle = C(acc,0.4);
+        ctx.lineWidth=1;
+        ctx.stroke();
+
+        /* spinning rotors at each arm end */
+        arms.forEach(function(a) {
+          var rad = a * Math.PI/180;
+          var rx = cx + Math.cos(rad)*armLen;
+          var ry = cy + Math.sin(rad)*armLen;
+          var r = Math.min(W,H)*0.14;
+
+          /* rotor blur circle */
+          ctx.strokeStyle = C(grn, 0.15);
+          ctx.lineWidth = 3;
+          ctx.beginPath(); ctx.arc(rx,ry,r,0,Math.PI*2); ctx.stroke();
+
+          /* rotor blade lines */
+          for (var b=0; b<3; b++) {
+            var bAng = ang + b*(Math.PI*2/3);
+            ctx.strokeStyle = C(acc, 0.55);
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.moveTo(rx,ry);
+            ctx.lineTo(rx + Math.cos(bAng)*r, ry + Math.sin(bAng)*r);
+            ctx.stroke();
+          }
+
+          /* thrust pulse ring */
+          var pulse = (Math.sin(ang*2 + a) + 1) * 0.5;
+          ctx.strokeStyle = C(grn, 0.12 + pulse*0.15);
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.arc(rx,ry, r + pulse*5, 0, Math.PI*2);
+          ctx.stroke();
+        });
+
+        /* T/W label */
+        ctx.font = '7px DM Mono, monospace';
+        ctx.fillStyle = C(grn, 0.6);
+        ctx.fillText('T/W > 2.0', W*0.06, H*0.94);
+        ctx.fillStyle = C(acc, 0.4);
+        ctx.fillText('< 1.8 kg', W*0.65, H*0.94);
+      }
+
+      function animate() {
+        if (!running) return;
+        angle += 0.12;
+        draw(angle);
+        anim = requestAnimationFrame(animate);
+      }
+
+      card.addEventListener('mouseenter', function() {
+        cancelAnimationFrame(anim);
+        running = true;
+        animate();
+      });
+      card.addEventListener('mouseleave', function() {
+        running = false;
+        cancelAnimationFrame(anim);
+        var ctx = canvas.getContext('2d');
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+      });
+    })();
+
+    /* ════════════════════════════════════
+       CARD 3 — AEROTHON: Mission path
+    ════════════════════════════════════ */
+    (function() {
+      var card   = document.getElementById('hud-aerothon');
+      var canvas = document.getElementById('canvas-aerothon');
+      if (!card || !canvas) return;
+      var anim, prog = 0, running = false;
+
+      /* mission waypoints (normalised 0-1) */
+      var waypoints = [
+        {x:0.1, y:0.85, label:'T/O'},
+        {x:0.25,y:0.35, label:'Climb'},
+        {x:0.45,y:0.2,  label:'Search'},
+        {x:0.6, y:0.3,  label:'Drop'},
+        {x:0.75,y:0.55, label:'RTB'},
+        {x:0.9, y:0.85, label:'Land'},
+      ];
+
+      function draw(p) {
+        sizeCanvas(canvas);
+        var ctx = canvas.getContext('2d');
+        var W = canvas.width, H = canvas.height;
+        ctx.clearRect(0,0,W,H);
+        var acc = getAccent();
+        var grn = getGreen();
+
+        /* ground line */
+        ctx.strokeStyle = C(acc, 0.15);
+        ctx.lineWidth = 0.8;
+        ctx.setLineDash([3,4]);
+        ctx.beginPath();
+        ctx.moveTo(W*0.05, H*0.88);
+        ctx.lineTo(W*0.95, H*0.88);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        /* total path length for progress */
+        var totalPts = waypoints.length - 1;
+        var globalProgress = p * totalPts;
+
+        /* draw completed segments */
+        ctx.strokeStyle = C(acc, 0.65);
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        for (var i=0; i<waypoints.length; i++) {
+          var segProgress = Math.min(Math.max(globalProgress - i, 0), 1);
+          if (i === 0) {
+            ctx.moveTo(waypoints[0].x*W, waypoints[0].y*H);
+          }
+          if (i > 0 && globalProgress >= i-1) {
+            var prev = waypoints[i-1];
+            var curr = waypoints[i];
+            var px = prev.x*W + (curr.x - prev.x)*W * Math.min(globalProgress-(i-1),1);
+            var py = prev.y*H + (curr.y - prev.y)*H * Math.min(globalProgress-(i-1),1);
+            ctx.lineTo(px, py);
+          }
+        }
+        ctx.stroke();
+
+        /* waypoint dots */
+        waypoints.forEach(function(wp, i) {
+          var reached = globalProgress >= i;
+          if (!reached) return;
+          var dotProgress = Math.min(globalProgress - i + 0.3, 1);
+          ctx.fillStyle = C(i===3 ? grn : acc, reached ? 0.9 : 0.3);
+          ctx.beginPath();
+          ctx.arc(wp.x*W, wp.y*H, 3*dotProgress, 0, Math.PI*2);
+          ctx.fill();
+
+          /* drop icon at waypoint 3 */
+          if (i===3 && reached) {
+            ctx.strokeStyle = C(grn, 0.7);
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(wp.x*W, wp.y*H+4);
+            ctx.lineTo(wp.x*W, wp.y*H+10);
+            ctx.stroke();
+            ctx.fillStyle = C(grn, 0.7);
+            ctx.beginPath();
+            ctx.arc(wp.x*W, wp.y*H+12, 2, 0, Math.PI*2);
+            ctx.fill();
+          }
+
+          /* label */
+          if (dotProgress > 0.5) {
+            ctx.font = '7px DM Mono, monospace';
+            ctx.fillStyle = C(acc, 0.45);
+            ctx.fillText(wp.label, wp.x*W - 6, wp.y*H - 6);
+          }
+        });
+
+        /* UAV icon at current position */
+        var curSeg = Math.min(Math.floor(globalProgress), totalPts-1);
+        var segFrac = Math.min(globalProgress - curSeg, 1);
+        var wx = waypoints[curSeg].x*W + (waypoints[curSeg+1].x - waypoints[curSeg].x)*W*segFrac;
+        var wy = waypoints[curSeg].y*H + (waypoints[curSeg+1].y - waypoints[curSeg].y)*H*segFrac;
+        if (globalProgress < totalPts) {
+          ctx.fillStyle = C(acc, 0.9);
+          ctx.beginPath();
+          ctx.arc(wx, wy, 3.5, 0, Math.PI*2);
+          ctx.fill();
+          /* pulse */
+          ctx.strokeStyle = C(acc, 0.3);
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.arc(wx, wy, 6 + Math.sin(Date.now()*0.008)*2, 0, Math.PI*2);
+          ctx.stroke();
+        }
+      }
+
+      function animate() {
+        if (!running) return;
+        prog += 0.012;
+        if (prog > 1.05) prog = 0; /* loop */
+        draw(Math.min(prog,1));
+        anim = requestAnimationFrame(animate);
+      }
+
+      card.addEventListener('mouseenter', function() {
+        cancelAnimationFrame(anim);
+        prog = 0; running = true;
+        animate();
+      });
+      card.addEventListener('mouseleave', function() {
+        running = false;
+        cancelAnimationFrame(anim);
+        canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
+      });
+    })();
+
+    /* ════════════════════════════════════
+       CARD 4 — DAIMLER: Harness schematic
+    ════════════════════════════════════ */
+    (function() {
+      var card   = document.getElementById('hud-daimler');
+      var canvas = document.getElementById('canvas-daimler');
+      if (!card || !canvas) return;
+      var anim, prog = 0, running = false;
+      var variantCount = 0;
+
+      /* harness node layout */
+      var nodes = [
+        {x:0.12,y:0.5,  label:'ECU'},
+        {x:0.35,y:0.25, label:'FLR'},
+        {x:0.35,y:0.75, label:'RHD'},
+        {x:0.6, y:0.2,  label:'LHD'},
+        {x:0.6, y:0.5,  label:'CAN'},
+        {x:0.6, y:0.8,  label:'GND'},
+        {x:0.85,y:0.35, label:'J1'},
+        {x:0.85,y:0.65, label:'J2'},
+      ];
+      var edges = [[0,1],[0,2],[1,3],[1,4],[2,4],[2,5],[4,6],[4,7],[3,6],[5,7]];
+
+      function draw(p) {
+        sizeCanvas(canvas);
+        var ctx = canvas.getContext('2d');
+        var W = canvas.width, H = canvas.height;
+        ctx.clearRect(0,0,W,H);
+        var acc = getAccent();
+        var grn = getGreen();
+
+        /* draw edges progressively */
+        var totalEdges = edges.length;
+        var edgeProgress = p * totalEdges;
+
+        edges.forEach(function(e, i) {
+          var ep = Math.min(Math.max(edgeProgress - i, 0), 1);
+          if (ep <= 0) return;
+          var n1 = nodes[e[0]], n2 = nodes[e[1]];
+          var x1=n1.x*W, y1=n1.y*H;
+          var x2=n1.x*W+(n2.x-n1.x)*W*ep;
+          var y2=n1.y*H+(n2.y-n1.y)*H*ep;
+          /* signal pulse */
+          var pulse = Math.sin(Date.now()*0.004 + i) * 0.5 + 0.5;
+          ctx.strokeStyle = C(acc, 0.2 + pulse*0.3);
+          ctx.lineWidth = 1;
+          ctx.setLineDash([2,3]);
+          ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+          ctx.setLineDash([]);
+        });
+
+        /* draw nodes */
+        nodes.forEach(function(n, i) {
+          var np = Math.min(Math.max((p * totalEdges) - i*0.5, 0), 1);
+          if (np <= 0) return;
+          var pulse = Math.sin(Date.now()*0.005 + i*1.3) * 0.5 + 0.5;
+          ctx.fillStyle = C(i===4 ? grn : acc, 0.12 + pulse*0.08);
+          ctx.strokeStyle = C(i===4 ? grn : acc, 0.5 + pulse*0.3);
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.arc(n.x*W, n.y*H, 4*np, 0, Math.PI*2);
+          ctx.fill(); ctx.stroke();
+          if (np > 0.7) {
+            ctx.font = '6px DM Mono,monospace';
+            ctx.fillStyle = C(acc, 0.45);
+            ctx.fillText(n.label, n.x*W+5, n.y*H+3);
+          }
+        });
+
+        /* variant counter */
+        ctx.font = 'bold 10px DM Mono,monospace';
+        ctx.fillStyle = C(grn, 0.7);
+        ctx.fillText(Math.floor(variantCount) + ' variants', W*0.05, H*0.95);
+      }
+
+      function animate() {
+        if (!running) return;
+        prog = Math.min(prog + 0.018, 1);
+        if (variantCount < 10) variantCount += 0.4;
+        draw(prog);
+        if (prog < 1 || variantCount < 10) anim = requestAnimationFrame(animate);
+        else {
+          /* keep pulsing after complete */
+          function pulse() {
+            if (!running) return;
+            draw(1);
+            anim = requestAnimationFrame(pulse);
+          }
+          pulse();
+        }
+      }
+
+      card.addEventListener('mouseenter', function() {
+        cancelAnimationFrame(anim);
+        prog = 0; variantCount = 0; running = true;
+        animate();
+      });
+      card.addEventListener('mouseleave', function() {
+        running = false;
+        cancelAnimationFrame(anim);
+        canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
+      });
+    })();
+
+    /* ════════════════════════════════════
+       CARD 5 — GOLD MEDAL: Rank waveform
+    ════════════════════════════════════ */
+    (function() {
+      var card   = document.getElementById('hud-medal');
+      var canvas = document.getElementById('canvas-medal');
+      if (!card || !canvas) return;
+      var anim, t = 0, running = false;
+
+      function draw(time) {
+        sizeCanvas(canvas);
+        var ctx = canvas.getContext('2d');
+        var W = canvas.width, H = canvas.height;
+        ctx.clearRect(0,0,W,H);
+        var amb = isDark() ? '#f59e0b' : '#d97706';
+
+        /* waveform — flat then sharp peak at rank #1 */
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(217,119,6,0.55)';
+        ctx.lineWidth = 1.5;
+        for (var xi=0; xi<W; xi++) {
+          var xt = xi / W;
+          /* sine noise base */
+          var noise = Math.sin(xt*18 + time*0.04)*0.04
+                    + Math.sin(xt*7  + time*0.02)*0.06;
+          /* sharp spike at 80% */
+          var spike = Math.exp(-Math.pow((xt-0.8)*12,2)) * 0.55;
+          var y = H*0.7 - (noise + spike) * H;
+          if (xi===0) ctx.moveTo(xi,y); else ctx.lineTo(xi,y);
+        }
+        ctx.stroke();
+
+        /* area fill under spike */
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(217,119,6,0.06)';
+        for (var xi2=0; xi2<W; xi2++) {
+          var xt2 = xi2 / W;
+          var noise2 = Math.sin(xt2*18+time*0.04)*0.04 + Math.sin(xt2*7+time*0.02)*0.06;
+          var spike2 = Math.exp(-Math.pow((xt2-0.8)*12,2))*0.55;
+          var y2 = H*0.7-(noise2+spike2)*H;
+          if (xi2===0) ctx.moveTo(xi2,y2); else ctx.lineTo(xi2,y2);
+        }
+        ctx.lineTo(W,H*0.7); ctx.lineTo(0,H*0.7); ctx.closePath();
+        ctx.fill();
+
+        /* #1 annotation */
+        ctx.font = 'bold 9px DM Mono,monospace';
+        ctx.fillStyle = 'rgba(217,119,6,0.8)';
+        ctx.fillText('RANK #1', W*0.72, H*0.13);
+        ctx.strokeStyle = 'rgba(217,119,6,0.3)';
+        ctx.lineWidth=0.8;
+        ctx.setLineDash([2,3]);
+        ctx.beginPath();
+        ctx.moveTo(W*0.8,H*0.15);
+        ctx.lineTo(W*0.8,H*0.7);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        /* CGPA label */
+        ctx.font = '7px DM Mono,monospace';
+        ctx.fillStyle = 'rgba(217,119,6,0.5)';
+        ctx.fillText('9.35 CGPA', W*0.05, H*0.94);
+        ctx.fillText('Gold Medalist', W*0.55, H*0.94);
+      }
+
+      function animate() {
+        if (!running) return;
+        t++;
+        draw(t);
+        anim = requestAnimationFrame(animate);
+      }
+
+      card.addEventListener('mouseenter', function() {
+        cancelAnimationFrame(anim);
+        t=0; running=true;
+        animate();
+      });
+      card.addEventListener('mouseleave', function() {
+        running=false;
+        cancelAnimationFrame(anim);
+        canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
+      });
+    })();
+
+  })(); /* end HUD */
 </script>
