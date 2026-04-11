@@ -76,6 +76,28 @@
       <li><strong>Innovation:</strong> Composite wing spar (balsa-birch sandwich) improved flexural strength by 15.4%.</li>
       <li><strong>Result:</strong> AIR 1 — highest payload of 9 kg (MTOW 14 kg), all flight requirements completed.</li>
     </ul>
+
+    <div class="result-bar-wrap result-anim" style="margin-top:18px;">
+      <div class="result-bar-label">
+        <span>Composite spar — flexural strength improvement</span>
+        <span>+15.4%</span>
+      </div>
+      <div style="display:grid; gap:6px;">
+        <div>
+          <div style="font-size:11px; color:var(--text3); margin-bottom:4px; font-family:'DM Mono',monospace;">Baseline conventional spar</div>
+          <div class="result-bar-track">
+            <div class="result-bar-fill green" style="width:0%" data-width="72%"></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px; color:var(--text3); margin-bottom:4px; font-family:'DM Mono',monospace;">Balsa-birch composite spar (+15.4%)</div>
+          <div class="result-bar-track">
+            <div class="result-bar-fill" style="width:0%" data-width="87%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="result-bar-note">Bending flexure test — sandwiched balsa-birch plywood construction</div>
+    </div>
 <div class="collapsible" onclick="toggleCollapsible(this)">
   <div class="collapsible-header">
     <span class="collapsible-title">General Specifications</span>
@@ -241,7 +263,25 @@
   }
 
   applyTheme(localStorage.getItem('theme') === 'dark');
-
+/* ── ANIMATED BAR CHARTS ON SCROLL ── */
+  (function() {
+    function animateBars() {
+      document.querySelectorAll('.result-anim').forEach(function(wrap) {
+        const rect = wrap.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.88 && !wrap.dataset.animated) {
+          wrap.dataset.animated = 'true';
+          wrap.querySelectorAll('.result-bar-fill').forEach(function(bar) {
+            const target = bar.dataset.width || '0%';
+            setTimeout(function() {
+              bar.style.width = target;
+            }, 100);
+          });
+        }
+      });
+    }
+    window.addEventListener('scroll', animateBars, { passive: true });
+    setTimeout(animateBars, 400);
+  })();
 </script>
 
 </body>
