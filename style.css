@@ -994,3 +994,8 @@ body.dark .filter-bar {
   .modal-header { padding: 18px 18px 14px; }
   .modal-body { padding: 18px; }
 }
+/* smooth scrolling inside calculation modals */
+.modal-box {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
