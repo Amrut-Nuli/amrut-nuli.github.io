@@ -73,6 +73,28 @@
       <li><strong>Weight Optimization:</strong> Lightweight 3D-printed PLA robotic arm and gripper to minimise energy consumption.</li>
     </ul>
 
+    <div class="result-bar-wrap result-anim" style="margin-top:18px;">
+      <div class="result-bar-label">
+        <span>Prototype cost reduction via 3D printing optimisation</span>
+        <span>−33%</span>
+      </div>
+      <div style="display:grid; gap:6px;">
+        <div>
+          <div style="font-size:11px; color:var(--text3); margin-bottom:4px; font-family:'DM Mono',monospace;">Conventional manufacturing cost (baseline)</div>
+          <div class="result-bar-track">
+            <div class="result-bar-fill red" style="width:0%" data-width="100%"></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px; color:var(--text3); margin-bottom:4px; font-family:'DM Mono',monospace;">3D printing + parameter optimisation (−33%)</div>
+          <div class="result-bar-track">
+            <div class="result-bar-fill green" style="width:0%" data-width="67%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="result-bar-note">Live camera YOLO V8 detection integrated · prototype successfully field-tested</div>
+    </div>
+
     <a class="proj-link" href="https://www.papermark.com/view/cmmnqycy70001i90438n8dvkn" target="_blank">Full project report ↗</a>
   </div>
 
@@ -110,6 +132,31 @@
       <li><strong>MAM Configuration:</strong> Magnetic-Angular-Magnetic hybrid identified as optimal — 18.38% reduction in peak mode deformation vs. conventional AAA baseline.</li>
       <li><strong>Frequency Optimization:</strong> Operating frequencies lowered by 4.59%, resulting in improved transmission efficiency.</li>
     </ul>
+
+    <div class="result-bar-wrap result-anim" style="margin-top:18px;">
+      <div class="result-bar-label">
+        <span>MAM hybrid config vs. conventional AAA baseline</span>
+        <span></span>
+      </div>
+      <div style="display:grid; gap:6px;">
+        <div>
+          <div style="font-size:11px; color:var(--text3); margin-bottom:4px; font-family:'DM Mono',monospace;">Deformation — AAA baseline → MAM hybrid (−18.38%)</div>
+          <div class="result-bar-track">
+            <div class="result-bar-fill red" style="width:0%" data-width="100%"></div>
+          </div>
+          <div class="result-bar-track" style="margin-top:4px;">
+            <div class="result-bar-fill green" style="width:0%" data-width="81.62%"></div>
+          </div>
+        </div>
+        <div style="margin-top:8px;">
+          <div style="font-size:11px; color:var(--text3); margin-bottom:4px; font-family:'DM Mono',monospace;">Operating frequency reduction (−4.59%)</div>
+          <div class="result-bar-track">
+            <div class="result-bar-fill amber" style="width:0%" data-width="4.59%" data-scale="10"></div>
+          </div>
+        </div>
+      </div>
+      <div class="result-bar-note">Campbell diagram analysis · ANSYS modal simulation · field-validated with service center data</div>
+    </div>
     <a class="proj-link" href="https://www.papermark.com/view/cmmns9k390004l804e8iyvzvl" target="_blank">Full project report ↗</a>
   </div>
 
@@ -283,6 +330,26 @@
 
   /* apply saved theme immediately on page load */
   applyTheme(localStorage.getItem('theme') === 'dark');
+  /* ── ANIMATED BAR CHARTS ON SCROLL ── */
+  (function() {
+    function animateBars() {
+      document.querySelectorAll('.result-anim').forEach(function(wrap) {
+        const rect = wrap.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.88 && !wrap.dataset.animated) {
+          wrap.dataset.animated = 'true';
+          wrap.querySelectorAll('.result-bar-fill').forEach(function(bar) {
+            const target = bar.dataset.width || '0%';
+            setTimeout(function() {
+              bar.style.width = target;
+            }, 100);
+          });
+        }
+      });
+    }
+    window.addEventListener('scroll', animateBars, { passive: true });
+    setTimeout(animateBars, 400);
+  })();
+  
 </script>
   <!-- ═══════════════════════════════════════════════════
      MODAL — COTTON CRUISER CALCULATIONS
