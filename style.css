@@ -1060,3 +1060,88 @@ body.dark .filter-bar {
   font-size: 11.5px; color: var(--text3);
   margin-top: 5px; font-style: italic;
 }
+/* ══════════════════════════════════════
+   TELEMETRY HUD HOVER CARDS
+══════════════════════════════════════ */
+.stat-card {
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+.stat-card canvas {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.stat-card:hover canvas {
+  opacity: 1;
+}
+.stat-card .stat-val,
+.stat-card .stat-desc {
+  position: relative;
+  z-index: 2;
+  transition: color 0.3s;
+}
+.stat-card:hover .stat-val {
+  color: var(--accent);
+}
+/* HUD scan line effect on hover */
+.stat-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(26,86,219,0.025) 3px,
+    rgba(26,86,219,0.025) 4px
+  );
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+  z-index: 1;
+}
+.stat-card:hover::after { opacity: 1; }
+/* HUD corner brackets */
+.stat-card::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1.5px solid transparent;
+  border-radius: 6px;
+  transition: border-color 0.35s;
+  pointer-events: none;
+  z-index: 3;
+}
+.stat-card:hover::before {
+  border-color: rgba(26,86,219,0.2);
+}
+/* HUD label that appears on hover */
+.hud-label {
+  position: absolute;
+  top: 8px; right: 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 8px; letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: 4;
+  pointer-events: none;
+}
+.stat-card:hover .hud-label { opacity: 0.7; }
+
+body.dark .stat-card::after {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(74,158,255,0.04) 3px,
+    rgba(74,158,255,0.04) 4px
+  );
+}
