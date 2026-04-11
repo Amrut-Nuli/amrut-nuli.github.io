@@ -105,7 +105,10 @@
       <li><strong>Remote Operation:</strong> Semi-autonomous control via custom IoT mobile app with WiFi operational range.</li>
       <li><strong>Weight Optimization:</strong> Lightweight 3D-printed PLA robotic arm and gripper to minimise energy consumption.</li>
     </ul>
-
+<button class="quick-look-btn" onclick="openModal('modal-cotton-calcs')"
+        style="margin-top:18px;">
+  📊 &nbsp;Quick Look at Calculations
+</button>
     <a class="proj-link" href="https://www.papermark.com/view/cmmnqycy70001i90438n8dvkn" target="_blank">Full project report ↗</a>
   </div>
 
@@ -279,5 +282,113 @@
   /* apply saved theme immediately on page load */
   applyTheme(localStorage.getItem('theme') === 'dark');
 </script>
+  <!-- ═══════════════════════════════════════════════════
+     MODAL — COTTON CRUISER CALCULATIONS
+════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-cotton-calcs"
+     onclick="handleOverlayClick(event,'modal-cotton-calcs')">
+  <div class="modal-box" style="max-width:900px;">
+
+    <!-- Sticky header -->
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Cotton Cruiser — Design Calculations</div>
+        <div class="modal-sub">
+          Scissor mechanism · Robotic arm kinematics · Workspace analysis · Drive &amp; battery sizing
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-cotton-calcs')">✕</button>
+    </div>
+
+    <!-- Scrollable body — images stacked -->
+    <div class="modal-body" style="padding:0;">
+
+      <!-- Section 1 -->
+      <div style="padding:20px 28px 0;">
+        <div class="modal-section-label">1 — Scissor Lift Kinematic Diagram &amp; Geometry</div>
+      </div>
+      <div style="padding:0 28px 24px;">
+        <img src="images/academic/cotton-robot/calc-1-scissor-kinematic.png"
+             alt="Scissor Lift Kinematic Diagram"
+             style="width:100%; height:auto; display:block;
+                    border-radius:var(--radius-sm);
+                    border:1px solid var(--border);"/>
+      </div>
+
+      <div style="height:1px; background:var(--border); margin:0 28px;"></div>
+
+      <!-- Section 2 -->
+      <div style="padding:20px 28px 0;">
+        <div class="modal-section-label">2 — Lead Screw Force Analysis &amp; Kinematic Graphs</div>
+      </div>
+      <div style="padding:0 28px 24px;">
+        <img src="images/academic/cotton-robot/calc-2-leadscrew-force.png"
+             alt="Lead Screw Force Analysis"
+             style="width:100%; height:auto; display:block;
+                    border-radius:var(--radius-sm);
+                    border:1px solid var(--border);"/>
+      </div>
+
+      <div style="height:1px; background:var(--border); margin:0 28px;"></div>
+
+      <!-- Section 3 -->
+      <div style="padding:20px 28px 0;">
+        <div class="modal-section-label">3 — Robotic Arm Kinematics &amp; Joint Torque Analysis</div>
+      </div>
+      <div style="padding:0 28px 24px;">
+        <img src="images/academic/cotton-robot/calc-3-robotic-arm-torque.png"
+             alt="Robotic Arm Torque Analysis"
+             style="width:100%; height:auto; display:block;
+                    border-radius:var(--radius-sm);
+                    border:1px solid var(--border);"/>
+      </div>
+
+      <div style="height:1px; background:var(--border); margin:0 28px;"></div>
+
+      <!-- Section 4 -->
+      <div style="padding:20px 28px 0;">
+        <div class="modal-section-label">4 — System Workspace Analysis &amp; Combined Reach</div>
+      </div>
+      <div style="padding:0 28px 24px;">
+        <img src="images/academic/cotton-robot/calc-4-workspace-analysis.png"
+             alt="System Workspace Analysis"
+             style="width:100%; height:auto; display:block;
+                    border-radius:var(--radius-sm);
+                    border:1px solid var(--border);"/>
+      </div>
+
+      <div style="height:1px; background:var(--border); margin:0 28px;"></div>
+
+      <!-- Section 5 -->
+      <div style="padding:20px 28px 0;">
+        <div class="modal-section-label">5 — Drive Force Analysis &amp; Battery Capacity Sizing</div>
+      </div>
+      <div style="padding:0 28px 28px;">
+        <img src="images/academic/cotton-robot/calc-5-drive-battery.png"
+             alt="Drive Force and Battery Sizing"
+             style="width:100%; height:auto; display:block;
+                    border-radius:var(--radius-sm);
+                    border:1px solid var(--border);"/>
+      </div>
+
+      <!-- Bottom close button so user doesn't have to scroll back up -->
+      <div style="padding:0 28px 28px; text-align:center;">
+        <button onclick="closeModal('modal-cotton-calcs')"
+                style="font-family:'DM Sans',sans-serif; font-size:13px;
+                       font-weight:500; padding:10px 32px;
+                       border-radius:var(--radius-sm);
+                       border:1px solid var(--border2);
+                       background:var(--bg2); color:var(--text2);
+                       cursor:pointer; transition:all 0.15s;"
+                onmouseover="this.style.background='var(--bg3)'; this.style.color='var(--text)'"
+                onmouseout="this.style.background='var(--bg2)'; this.style.color='var(--text2)'">
+          Close ✕
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+  
 </body>
 </html>
