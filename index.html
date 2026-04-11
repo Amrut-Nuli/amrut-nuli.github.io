@@ -38,14 +38,15 @@
     </div>
 
     <!-- Name + title -->
+   <!-- Name + title -->
     <div style="flex:1; min-width:0;">
       <div class="hero-name">Amrut Nuli</div>
       <div class="hero-title-line">
-        <span>Mechanical Engineer</span>
-        <span class="hero-dot">·</span>
-        <span>CAD / CAE</span>
-        <span class="hero-dot">·</span>
-        <span>Automotive Product Design</span>
+        <span id="typed-text"></span><span class="typed-cursor" id="typed-cursor"></span>
+      </div>
+      <div class="open-to-work">
+        <span class="pulse-dot"></span>
+        Open to opportunities
       </div>
     </div>
 
@@ -145,26 +146,27 @@
   <hr/>
 
   <!-- ── HIGHLIGHTS ── -->
+<!-- ── HIGHLIGHTS ── -->
   <div class="label">Highlights</div>
-  <div class="stats-grid">
+  <div class="stats-grid" id="stats-grid">
     <div class="stat-card">
-      <div class="stat-val">AIR 1</div>
+      <div class="stat-val" data-target="1" data-prefix="AIR ">AIR —</div>
       <div class="stat-desc">SAE Aero Design Challenge 2022</div>
     </div>
     <div class="stat-card">
-      <div class="stat-val">AIR 2</div>
+      <div class="stat-val" data-target="2" data-prefix="AIR ">AIR —</div>
       <div class="stat-desc">SAE ADDC 2023</div>
     </div>
     <div class="stat-card">
-      <div class="stat-val">AIR 4</div>
+      <div class="stat-val" data-target="4" data-prefix="AIR ">AIR —</div>
       <div class="stat-desc">SAE Aerothon 2023</div>
     </div>
     <div class="stat-card">
-      <div class="stat-val">1 yr</div>
+      <div class="stat-val" data-target="1" data-prefix="" data-suffix=" yr">— yr</div>
       <div class="stat-desc">Industry R&amp;D — Daimler Truck Innovation Center India</div>
     </div>
     <div class="stat-card">
-      <div class="stat-val">Gold Medal</div>
+      <div class="stat-val" data-text="Gold Medal">—</div>
       <div class="stat-desc">Mech. Engg. batch of 2024 — KLE Tech University</div>
     </div>
   </div>
@@ -252,6 +254,7 @@
 </footer>
 
 <script>
+  /* ── THEME ── */
   function applyTheme(dark) {
     document.body.classList.toggle('dark', dark);
     document.getElementById('icon-light').classList.toggle('active', !dark);
@@ -267,7 +270,87 @@
     if (saved === 'dark') applyTheme(true);
     else applyTheme(false);
   })();
-</script>
 
-</body>
-</html>
+  /* ── TYPED TEXT ── */
+  (function() {
+    const phrases = [
+      'Mechanical Engineer',
+      'CAD / CAE Specialist',
+      'Automotive Product Design',
+      'FEA & CFD Analysis',
+    ];
+    let pi = 0, ci = 0, deleting = false;
+    const el = document.getElementById('typed-text');
+    const cursor = document.getElementById('typed-cursor');
+    function type() {
+      const current = phrases[pi];
+      if (!deleting) {
+        el.textContent = current.substring(0, ci + 1);
+        ci++;
+        if (ci === current.length) {
+          deleting = true;
+          setTimeout(type, 1800);
+          return;
+        }
+        setTimeout(type, 60);
+      } else {
+        el.textContent = current.substring(0, ci - 1);
+        ci--;
+        if (ci === 0) {
+          deleting = false;
+          pi = (pi + 1) % phrases.length;
+          setTimeout(type, 300);
+          return;
+        }
+        setTimeout(type, 35);
+      }
+    }
+    setTimeout(type, 600);
+  })();
+
+  /* ── ANIMATED COUNTERS ── */
+  (function() {
+    let triggered = false;
+    function animateCounters() {
+      if (triggered) return;
+      const grid = document.getElementById('stats-grid');
+      if (!grid) return;
+      const rect = grid.getBoundingClientRect();
+      if (rect.top > window.innerHeight * 0.85) return;
+      triggered = true;
+
+      grid.querySelectorAll('.stat-val[data-target]').forEach(function(el) {
+        const target = parseInt(el.dataset.target);
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        const duration = 900;
+        const steps = 30;
+        let step = 0;
+        const timer = setInterval(function() {
+          step++;
+          const val = Math.round(target * step / steps);
+          el.textContent = prefix + val + suffix;
+          if (step >= steps) {
+            clearInterval(timer);
+            el.textContent = prefix + target + suffix;
+          }
+        }, duration / steps);
+      });
+
+      /* text-only stat (Gold Medal) — typewriter effect */
+      grid.querySelectorAll('.stat-val[data-text]').forEach(function(el) {
+        const text = el.dataset.text;
+        let i = 0;
+        el.textContent = '';
+        const t = setInterval(function() {
+          el.textContent += text[i];
+          i++;
+          if (i >= text.length) clearInterval(t);
+        }, 60);
+      });
+    }
+
+    window.addEventListener('scroll', animateCounters, { passive: true });
+    setTimeout(animateCounters, 300);
+  })();
+</script>
