@@ -131,7 +131,7 @@
     ▶&nbsp; Watch flight video of RC Aircraft at SAE ADC 2022 event carrying 9Kg payload
   </a>
 </div>
-    <a class="proj-link" href="https://www.papermark.com/view/cmmnq4bdk0006lc04gyyun6wr" target="_blank">Full project report ↗</a>
+   <button class="report-btn" onclick="openPDF('reports/sae-adc-2022.pdf','SAE Aero Design Challenge 2022 — RC Aircraft','Structural analysis · Aerodynamics · Manufacturing','https://www.papermark.com/view/cmmnq4bdk0006lc04gyyun6wr')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Quick Look — Summary Report</button>
   </div>
 
   <!-- ── PROJECT 2 ── -->
@@ -169,7 +169,7 @@
       <li><strong>Additive Manufacturing:</strong> Optimized slicing parameters in Ultimaker CURA for ideal strength-to-weight ratio.</li>
     </ul>
 
-    <a class="proj-link" href="https://www.papermark.com/view/cmmnmfp710001la04xfdl3rt6" target="_blank">Full project report ↗</a>
+   <button class="report-btn" onclick="openPDF('reports/aerothon-2022.pdf','SAE Aerothon 2022 — Precision Cargo UAV','Topology optimization · Impact analysis · Additive manufacturing','https://www.papermark.com/view/cmmnmfp710001la04xfdl3rt6')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Quick Look — Summary Report</button>
   </div>
 
   <!-- ── PROJECT 3 ── -->
@@ -231,7 +231,7 @@
       <div class="result-bar-note">SolidWorks modelling · ANSYS topology optimization · T/W ratio &gt;2.0 maintained</div>
     </div>
 
-    <a class="proj-link" href="https://www.papermark.com/view/cmmnn4xif000al504mrufzq5y" target="_blank">Full project report ↗</a>
+   <button class="report-btn" onclick="openPDF('reports/aerothon-2023.pdf','SAE Aerothon 2023 — Tactical Multirotor UAV','CFD downwash · Topology optimization · Mission profile','https://www.papermark.com/view/cmmnn4xif000al504mrufzq5y')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Quick Look — Summary Report</button>
   </div>
 
 </main>
@@ -304,7 +304,86 @@
     window.addEventListener('scroll', animateBars, { passive: true });
     setTimeout(animateBars, 400);
   })();
-</script>
+/* ══ PDF MODAL ══ */
+  function openPDF(path, title, sub, fallback) {
+    document.getElementById('pdf-title').textContent   = title;
+    document.getElementById('pdf-sub').textContent     = sub;
+    document.getElementById('pdf-ext').href            = fallback;
+    document.getElementById('pdf-fallback-link').href  = fallback;
+    document.getElementById('pdf-fallback').classList.remove('show');
+    document.getElementById('pdf-spinner').classList.remove('hide');
+    document.getElementById('pdf-frame').src = '';
+    document.getElementById('pdf-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
 
+    /* load PDF — show fallback if it fails after 6 seconds */
+    setTimeout(function() {
+      var frame = document.getElementById('pdf-frame');
+      try {
+        if (!frame.contentDocument ||
+            frame.contentDocument.body.innerHTML === '') {
+          showPDFFallback(fallback);
+        }
+      } catch(e) {
+        /* cross-origin — PDF likely loaded fine, do nothing */
+      }
+    }, 6000);
+
+    document.getElementById('pdf-frame').src = path;
+  }
+
+  function showPDFFallback(url) {
+    document.getElementById('pdf-spinner').classList.add('hide');
+    document.getElementById('pdf-fallback').classList.add('show');
+    document.getElementById('pdf-fallback-link').href = url;
+  }
+
+  function closePDF() {
+    document.getElementById('pdf-modal').classList.remove('open');
+    document.getElementById('pdf-frame').src = '';
+    document.getElementById('pdf-spinner').classList.remove('hide');
+    document.getElementById('pdf-fallback').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+</script>
+<!-- ═══ SHARED PDF MODAL ═══ -->
+<div class="pdf-overlay" id="pdf-modal"
+     onclick="if(event.target===this)closePDF()">
+  <div class="pdf-box">
+    <div class="pdf-header">
+      <div style="flex:1; min-width:0;">
+        <div class="pdf-header-title" id="pdf-title">Project Report</div>
+        <div class="pdf-header-sub" id="pdf-sub"></div>
+      </div>
+      <div class="pdf-header-right">
+        <a class="pdf-ext-btn" id="pdf-ext" href="#" target="_blank">↗ Open full</a>
+        <button class="pdf-close-btn" onclick="closePDF()">✕</button>
+      </div>
+    </div>
+    <div class="pdf-body">
+      <div class="pdf-spinner-wrap" id="pdf-spinner">
+        <div class="pdf-spinner"></div>
+        <div class="pdf-spinner-text">Loading report...</div>
+      </div>
+      <iframe id="pdf-frame" src="" title="Project Report"
+              onload="document.getElementById('pdf-spinner').classList.add('hide')">
+      </iframe>
+      <div class="pdf-fallback" id="pdf-fallback">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.5" style="opacity:0.25">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+          <polyline points="14,2 14,8 20,8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+        <div class="pdf-fallback-msg">
+          PDF preview is not available.<br/>
+          <a class="pdf-fallback-link" id="pdf-fallback-link"
+             href="#" target="_blank">Click here to open the full report ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
