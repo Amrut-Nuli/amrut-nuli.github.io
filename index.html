@@ -50,8 +50,12 @@
    <!-- Name + title -->
     <div style="flex:1; min-width:0;">
       <div class="hero-name">Amrut Nuli</div>
-      <div class="hero-title-line">
-        <span id="typed-text"></span><span class="typed-cursor" id="typed-cursor"></span>
+     <div class="hero-title-line">
+        <span>Mechanical Engineer</span>
+        <span class="hero-dot">·</span>
+        <span>Product Design</span>
+        <span class="hero-dot">·</span>
+        <span>CAD &amp; CAE Enthusiast</span>
       </div>
       <div class="open-to-work">
         <span class="pulse-dot"></span>
@@ -426,42 +430,6 @@
     else applyTheme(false);
   })();
 
-  /* ── TYPED TEXT ── */
-  (function() {
-    const phrases = [
-      'Mechanical Engineer',
-      'CAD / CAE Specialist',
-      'Automotive Product Design',
-      'FEA & CFD Analysis',
-    ];
-    let pi = 0, ci = 0, deleting = false;
-    const el = document.getElementById('typed-text');
-    const cursor = document.getElementById('typed-cursor');
-    function type() {
-      const current = phrases[pi];
-      if (!deleting) {
-        el.textContent = current.substring(0, ci + 1);
-        ci++;
-        if (ci === current.length) {
-          deleting = true;
-          setTimeout(type, 1800);
-          return;
-        }
-        setTimeout(type, 60);
-      } else {
-        el.textContent = current.substring(0, ci - 1);
-        ci--;
-        if (ci === 0) {
-          deleting = false;
-          pi = (pi + 1) % phrases.length;
-          setTimeout(type, 300);
-          return;
-        }
-        setTimeout(type, 35);
-      }
-    }
-    setTimeout(type, 600);
-  })();
 
   /* ── ANIMATED COUNTERS ── */
   (function() {
