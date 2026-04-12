@@ -6,6 +6,13 @@
   <title>Amrut Nuli — Mechanical Engineer</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
+  <!-- Engineering crosshair -->
+<div class="crosshair-overlay" id="crosshair">
+  <div class="crosshair-h"></div>
+  <div class="crosshair-v"></div>
+  <div class="crosshair-ring"></div>
+  <div class="crosshair-coords" id="crosshair-coords">X:000 Y:000</div>
+</div>
 <body>
 <div class="scroll-progress" id="scroll-progress"></div>
 <button class="back-to-top" id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
@@ -29,7 +36,8 @@
 <main class="page">
 
   <!-- ── HERO ── -->
-  <div class="hero-row">
+<!-- ── HERO ── -->
+  <div class="hero-row hero-bg">
 
     <!-- Profile photo -->
     <div class="avatar-wrap" style="width:110px; height:110px;">
@@ -129,7 +137,34 @@
     <a class="btn" href="mailto:amrutnuli558@gmail.com">Email me</a>
   </div>
 
-  <hr/>
+<!-- ── ACHIEVEMENT TICKER ── -->
+  <div class="ticker-wrap">
+    <div class="ticker-track" id="ticker-track">
+      <span class="ticker-item">AIR 1 &nbsp;·&nbsp; SAE Aero Design 2022 <span class="ticker-dot"></span></span>
+      <span class="ticker-item">9 kg payload carried nationally <span class="ticker-dot"></span></span>
+      <span class="ticker-item">AIR 2 &nbsp;·&nbsp; SAE ADDC 2023 <span class="ticker-dot"></span></span>
+      <span class="ticker-item">AIR 4 &nbsp;·&nbsp; SAE Aerothon 2023 <span class="ticker-dot"></span></span>
+      <span class="ticker-item">1 yr R&amp;D · Daimler Truck India <span class="ticker-dot"></span></span>
+      <span class="ticker-item">10+ vehicle variants optimised <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Gold Medalist · 9.35 CGPA <span class="ticker-dot"></span></span>
+      <span class="ticker-item">18.38% deformation reduction · ICAPSM 2024 <span class="ticker-dot"></span></span>
+      <span class="ticker-item">40% weight reduction · topology optimisation <span class="ticker-dot"></span></span>
+      <span class="ticker-item">CSWA · Siemens NX Certified <span class="ticker-dot"></span></span>
+      <!-- duplicate for seamless loop -->
+      <span class="ticker-item">AIR 1 &nbsp;·&nbsp; SAE Aero Design 2022 <span class="ticker-dot"></span></span>
+      <span class="ticker-item">9 kg payload carried nationally <span class="ticker-dot"></span></span>
+      <span class="ticker-item">AIR 2 &nbsp;·&nbsp; SAE ADDC 2023 <span class="ticker-dot"></span></span>
+      <span class="ticker-item">AIR 4 &nbsp;·&nbsp; SAE Aerothon 2023 <span class="ticker-dot"></span></span>
+      <span class="ticker-item">1 yr R&amp;D · Daimler Truck India <span class="ticker-dot"></span></span>
+      <span class="ticker-item">10+ vehicle variants optimised <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Gold Medalist · 9.35 CGPA <span class="ticker-dot"></span></span>
+      <span class="ticker-item">18.38% deformation reduction · ICAPSM 2024 <span class="ticker-dot"></span></span>
+      <span class="ticker-item">40% weight reduction · topology optimisation <span class="ticker-dot"></span></span>
+      <span class="ticker-item">CSWA · Siemens NX Certified <span class="ticker-dot"></span></span>
+    </div>
+  </div>
+
+  <!-- ── ABOUT ── -->
 
   <!-- ── ABOUT ── -->
   <div class="label">About me</div>
@@ -194,78 +229,216 @@
   </div>
   <hr/>
 
-  <!-- ── SKILLS ── -->
-  <div class="label">Technical skills</div>
-
-  <div class="skill-section">
-    <div class="skill-label">CAD — Design &amp; Modelling</div>
-    <div class="pill-row">
-      <span class="pill">Siemens NX</span>
-      <span class="pill">SolidWorks</span>
-      <span class="pill">CATIA V5</span>
-      <span class="pill">AutoCAD</span>
-      <span class="pill">Fusion 360</span>
-      <span class="pill">GD&amp;T</span>
+<!-- ── SKILLS ── -->
+  <div class="label">Tool proficiency</div>
+  <div class="radar-wrap">
+    <div class="radar-canvas-wrap">
+      <canvas id="radar-chart" width="220" height="220"></canvas>
     </div>
-  </div>
-
-  <div class="skill-section">
-    <div class="skill-label">CAE — Simulation &amp; Analysis</div>
-    <div class="pill-row">
-      <span class="pill">ANSYS Mechanical</span>
-      <span class="pill">Hypermesh</span>
-      <span class="pill">Inspire</span>
-      <span class="pill">XFLR5</span>
-      <span class="pill">MATLAB</span>
-    </div>
-  </div>
-
-  <div class="skill-section">
-    <div class="skill-label">Other tools</div>
-    <div class="pill-row">
-      <span class="pill">Siemens Teamcenter</span>
-      <span class="pill">Smaragd PDM</span>
-      <span class="pill">Python</span>
-      <span class="pill">MS Office Suite</span>
+    <div class="radar-legend" id="radar-legend">
+      <div class="radar-legend-item">
+        <div class="radar-legend-dot" style="background:#1a56db;"></div>
+        <span style="width:110px; font-size:12.5px;">Siemens NX</span>
+        <div class="radar-legend-bar"><div class="radar-legend-fill" style="background:#1a56db;" data-w="90%"></div></div>
+        <span style="font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; width:28px; text-align:right;">90%</span>
+      </div>
+      <div class="radar-legend-item">
+        <div class="radar-legend-dot" style="background:#1a56db;"></div>
+        <span style="width:110px; font-size:12.5px;">SolidWorks</span>
+        <div class="radar-legend-bar"><div class="radar-legend-fill" style="background:#1a56db;" data-w="88%"></div></div>
+        <span style="font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; width:28px; text-align:right;">88%</span>
+      </div>
+      <div class="radar-legend-item">
+        <div class="radar-legend-dot" style="background:#059669;"></div>
+        <span style="width:110px; font-size:12.5px;">ANSYS</span>
+        <div class="radar-legend-bar"><div class="radar-legend-fill" style="background:#059669;" data-w="85%"></div></div>
+        <span style="font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; width:28px; text-align:right;">85%</span>
+      </div>
+      <div class="radar-legend-item">
+        <div class="radar-legend-dot" style="background:#d97706;"></div>
+        <span style="width:110px; font-size:12.5px;">Teamcenter</span>
+        <div class="radar-legend-bar"><div class="radar-legend-fill" style="background:#d97706;" data-w="88%"></div></div>
+        <span style="font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; width:28px; text-align:right;">88%</span>
+      </div>
+      <div class="radar-legend-item">
+        <div class="radar-legend-dot" style="background:#059669;"></div>
+        <span style="width:110px; font-size:12.5px;">CATIA V5</span>
+        <div class="radar-legend-bar"><div class="radar-legend-fill" style="background:#059669;" data-w="75%"></div></div>
+        <span style="font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; width:28px; text-align:right;">75%</span>
+      </div>
+      <div class="radar-legend-item">
+        <div class="radar-legend-dot" style="background:#1a56db;"></div>
+        <span style="width:110px; font-size:12.5px;">GD&amp;T</span>
+        <div class="radar-legend-bar"><div class="radar-legend-fill" style="background:#1a56db;" data-w="82%"></div></div>
+        <span style="font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; width:28px; text-align:right;">82%</span>
+      </div>
     </div>
   </div>
 
   <hr/>
 
-  <!-- ── EXPLORE ── -->
-  <div class="label">Explore</div>
-  <div class="explore-grid">
-    <a href="sae-projects.html" class="explore-card">
-      <div class="explore-type">Projects</div>
-      <div class="explore-title">SAE Projects</div>
-      <div class="explore-sub">4 national competitions</div>
-    </a>
-    <a href="academic-projects.html" class="explore-card">
-      <div class="explore-type">Projects</div>
-      <div class="explore-title">Academic Projects</div>
-      <div class="explore-sub">5 design &amp; analysis projects</div>
-    </a>
-    <a href="work-experience.html" class="explore-card">
-      <div class="explore-type">Experience</div>
-      <div class="explore-title">Work Experience</div>
-      <div class="explore-sub">Daimler Truck India</div>
-    </a>
-    <a href="achievements.html" class="explore-card">
-      <div class="explore-type">Awards</div>
-      <div class="explore-title">Achievements</div>
-      <div class="explore-sub">AIR 1, 2 &amp; 4 nationally</div>
-    </a>
-    <a href="certifications.html" class="explore-card">
-      <div class="explore-type">Credentials</div>
-      <div class="explore-title">Certifications</div>
-      <div class="explore-sub">CAD, CAE &amp; more</div>
-    </a>
-    <a href="research.html" class="explore-card">
-      <div class="explore-type">Publication</div>
-      <div class="explore-title">Research Paper</div>
-      <div class="explore-sub">ICAPSM 2024</div>
-    </a>
+ <!-- ── CAREER TIMELINE ── -->
+  <div class="label">Career journey</div>
+  <div class="career-timeline" id="career-tl">
+    <div class="career-line"><div class="career-line-fill" id="career-fill"></div></div>
+    <div class="career-nodes">
+
+      <div class="career-node active" title="SAE Aero Design Team joined">
+        <div class="career-node-date">Oct 2021</div>
+        <div class="career-node-dot"></div>
+        <div class="career-node-label">Joined AeroKLE</div>
+      </div>
+
+      <div class="career-node highlight" title="AIR 1 — SAE Aero Design Challenge">
+        <div class="career-node-date">Sep 2022</div>
+        <div class="career-node-dot"></div>
+        <div class="career-node-label">AIR 1 · SAE ADC</div>
+      </div>
+
+      <div class="career-node active" title="SAE Aerothon 2022">
+        <div class="career-node-date">Nov 2022</div>
+        <div class="career-node-dot"></div>
+        <div class="career-node-label">SAE Aerothon</div>
+      </div>
+
+      <div class="career-node highlight" title="AIR 2 — SAE ADDC 2023">
+        <div class="career-node-date">Nov 2023</div>
+        <div class="career-node-dot"></div>
+        <div class="career-node-label">AIR 2 · ADDC</div>
+      </div>
+
+      <div class="career-node highlight" title="AIR 4 — SAE Aerothon 2023">
+        <div class="career-node-date">Nov 2023</div>
+        <div class="career-node-dot"></div>
+        <div class="career-node-label">AIR 4 · Aerothon</div>
+      </div>
+
+      <div class="career-node active" title="Engineering Intern — Daimler Truck">
+        <div class="career-node-date">Feb 2024</div>
+        <div class="career-node-dot"></div>
+        <div class="career-node-label">Daimler Intern</div>
+      </div>
+
+      <div class="career-node highlight" title="Gold Medal — KLE Tech University">
+        <div class="career-node-date">Jun 2024</div>
+        <div class="career-node-dot"></div>
+        <div class="career-node-label">Gold Medal · KLE</div>
+      </div>
+
+      <div class="career-node highlight" title="Graduate Engineer Trainee — Daimler Truck">
+        <div class="career-node-date">Aug 2024</div>
+        <div class="career-node-dot"></div>
+        <div class="career-node-label">Graduate Engineer</div>
+      </div>
+
+      <div class="career-node active" title="Open to opportunities">
+        <div class="career-node-date">Now</div>
+        <div class="career-node-dot" style="border-color:var(--green); background:var(--green-dim); animation: pulse-ring 1.8s ease-out infinite;"></div>
+        <div class="career-node-label" style="color:var(--green);">Open ✦</div>
+      </div>
+
+    </div>
   </div>
+
+  <hr/>
+
+  <!-- ── FLIP PROJECT CARDS ── -->
+  <div class="label">Explore — hover to flip</div>
+  <div class="flip-grid">
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-front">
+          <div class="flip-front-type">SAE Competition</div>
+          <div class="flip-front-title">SAE Aero Design 2022</div>
+          <div class="flip-front-sub">RC aircraft · structural analysis · manufacturing</div>
+        </div>
+        <div class="flip-back">
+          <div class="flip-back-result">AIR 1 🏆</div>
+          <div class="flip-back-desc">9 kg payload · 15.4% flexural strength gain · composite spar innovation</div>
+          <a class="flip-back-link" href="sae-projects.html">View project →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-front">
+          <div class="flip-front-type">SAE Competition</div>
+          <div class="flip-front-title">SAE Aerothon 2023</div>
+          <div class="flip-front-sub">Tactical UAV · CFD · topology optimization</div>
+        </div>
+        <div class="flip-back">
+          <div class="flip-back-result">AIR 4</div>
+          <div class="flip-back-desc">T/W &gt;2.0 · −40% component weight · −65% print time</div>
+          <a class="flip-back-link" href="sae-projects.html">View project →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-front">
+          <div class="flip-front-type">R&amp;D Experience</div>
+          <div class="flip-front-title">Daimler Truck India</div>
+          <div class="flip-front-sub">NX routing · Teamcenter · DMU packaging</div>
+        </div>
+        <div class="flip-back">
+          <div class="flip-back-result">1 yr</div>
+          <div class="flip-back-desc">10+ vehicle variants · LHD/RHD harness layouts · release workflows</div>
+          <a class="flip-back-link" href="work-experience.html">View experience →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-front">
+          <div class="flip-front-type">Research Paper</div>
+          <div class="flip-front-title">Transmission Axle Analysis</div>
+          <div class="flip-front-sub">FEA · rotordynamics · hybrid bearings</div>
+        </div>
+        <div class="flip-back">
+          <div class="flip-back-result">ICAPSM 2024</div>
+          <div class="flip-back-desc">−18.38% deformation · −4.59% frequency · MAM hybrid config</div>
+          <a class="flip-back-link" href="research.html">View research →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-front">
+          <div class="flip-front-type">Mechatronics</div>
+          <div class="flip-front-title">Cotton Cruiser Robot</div>
+          <div class="flip-front-sub">YOLO V8 · scissor lift · IoT control</div>
+        </div>
+        <div class="flip-back">
+          <div class="flip-back-result">Prototype ✓</div>
+          <div class="flip-back-desc">Real-time cotton detection · 207–773 mm lift stroke · 33% cost reduction</div>
+          <a class="flip-back-link" href="academic-projects.html">View project →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-front">
+          <div class="flip-front-type">All pages</div>
+          <div class="flip-front-title">Full Portfolio</div>
+          <div class="flip-front-sub">8 projects · certifications · achievements</div>
+        </div>
+        <div class="flip-back" style="background:var(--green-dim); border-color:var(--green-border);">
+          <div class="flip-back-result" style="color:var(--green);">Explore</div>
+          <div class="flip-back-desc">Navigate all sections using the menu above ↑</div>
+          <a class="flip-back-link" href="achievements.html" style="color:var(--green); border-color:var(--green-border);">View achievements →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
 
 </main>
 
@@ -273,7 +446,6 @@
   amrutnuli558@gmail.com &nbsp;·&nbsp;
   <a href="https://www.linkedin.com/in/amrut-nuli/" target="_blank">linkedin.com/in/amrut-nuli</a>
 </footer>
-
 <script>
   /* ── THEME ── */
   function applyTheme(dark) {
@@ -910,4 +1082,236 @@
     })();
 
   })(); /* end HUD */
+  /* ══════════════════════════════════
+     HERO GRID PARALLAX
+  ══════════════════════════════════ */
+  (function() {
+    var hero = document.querySelector('.hero-bg');
+    if (!hero) return;
+    hero.addEventListener('mousemove', function(e) {
+      var rect = hero.getBoundingClientRect();
+      var mx = (e.clientX - rect.left) / rect.width - 0.5;
+      var my = (e.clientY - rect.top)  / rect.height - 0.5;
+      var pseudo = hero.querySelector('*');
+      hero.style.setProperty('--px', (mx * 12) + 'px');
+      hero.style.setProperty('--py', (my * 12) + 'px');
+    });
+  })();
+
+  /* ══════════════════════════════════
+     ENGINEERING CROSSHAIR
+  ══════════════════════════════════ */
+  (function() {
+    var ch = document.getElementById('crosshair');
+    var coords = document.getElementById('crosshair-coords');
+    var heroEl = document.querySelector('.hero-bg');
+    if (!ch || !heroEl) return;
+    var active = false;
+
+    heroEl.addEventListener('mouseenter', function() {
+      active = true;
+      ch.classList.add('visible');
+      document.body.style.cursor = 'none';
+    });
+    heroEl.addEventListener('mouseleave', function() {
+      active = false;
+      ch.classList.remove('visible');
+      document.body.style.cursor = '';
+    });
+    document.addEventListener('mousemove', function(e) {
+      if (!active) return;
+      ch.style.left = (e.clientX - 14) + 'px';
+      ch.style.top  = (e.clientY - 14) + 'px';
+      coords.textContent = 'X:' + String(Math.round(e.clientX)).padStart(3,'0')
+                         + ' Y:' + String(Math.round(e.clientY)).padStart(3,'0');
+    });
+  })();
+
+  /* ══════════════════════════════════
+     CAREER TIMELINE ANIMATION
+  ══════════════════════════════════ */
+  (function() {
+    var fill = document.getElementById('career-fill');
+    var tl   = document.getElementById('career-tl');
+    if (!fill || !tl) return;
+    var done = false;
+    function animate() {
+      if (done) return;
+      var rect = tl.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.85) {
+        done = true;
+        fill.style.width = '100%';
+        var nodes = tl.querySelectorAll('.career-node');
+        nodes.forEach(function(n, i) {
+          setTimeout(function() {
+            n.classList.add('active');
+          }, i * 150);
+        });
+      }
+    }
+    window.addEventListener('scroll', animate, {passive:true});
+    setTimeout(animate, 400);
+  })();
+
+  /* ══════════════════════════════════
+     RADAR CHART
+  ══════════════════════════════════ */
+  (function() {
+    var canvas = document.getElementById('radar-chart');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var axes = [
+      {label:'CAD',      val:0.90},
+      {label:'CAE/FEA',  val:0.85},
+      {label:'PDM',      val:0.88},
+      {label:'Mfg',      val:0.80},
+      {label:'ML/Code',  val:0.70},
+      {label:'GD&T',     val:0.82},
+    ];
+    var N = axes.length;
+    var cx = 110, cy = 110, R = 80;
+    var progress = 0;
+    var done = false;
+
+    function drawRadar(p) {
+      ctx.clearRect(0,0,220,220);
+      var isDk = document.body.classList.contains('dark');
+      var accent  = isDk ? '#4a9eff' : '#1a56db';
+      var gridCol = isDk ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.07)';
+      var textCol = isDk ? 'rgba(255,255,255,0.45)' : 'rgba(0,0,0,0.45)';
+
+      /* grid rings */
+      [0.25,0.5,0.75,1].forEach(function(r) {
+        ctx.beginPath();
+        for (var i=0;i<N;i++) {
+          var ang = (i/N)*Math.PI*2 - Math.PI/2;
+          var x = cx + Math.cos(ang)*R*r;
+          var y = cy + Math.sin(ang)*R*r;
+          i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+        }
+        ctx.closePath();
+        ctx.strokeStyle = gridCol;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+      });
+
+      /* axis lines */
+      for (var i=0;i<N;i++) {
+        var ang = (i/N)*Math.PI*2 - Math.PI/2;
+        ctx.beginPath();
+        ctx.moveTo(cx,cy);
+        ctx.lineTo(cx+Math.cos(ang)*R, cy+Math.sin(ang)*R);
+        ctx.strokeStyle = gridCol;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+        /* labels */
+        var lx = cx + Math.cos(ang)*(R+16);
+        var ly = cy + Math.sin(ang)*(R+16);
+        ctx.font = '9px DM Mono,monospace';
+        ctx.fillStyle = textCol;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(axes[i].label, lx, ly);
+      }
+
+      /* data polygon */
+      ctx.beginPath();
+      for (var i=0;i<N;i++) {
+        var ang = (i/N)*Math.PI*2 - Math.PI/2;
+        var v = axes[i].val * p;
+        var x = cx + Math.cos(ang)*R*v;
+        var y = cy + Math.sin(ang)*R*v;
+        i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+      }
+      ctx.closePath();
+      ctx.fillStyle = isDk
+        ? 'rgba(74,158,255,0.15)'
+        : 'rgba(26,86,219,0.1)';
+      ctx.fill();
+      ctx.strokeStyle = accent;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      /* dots */
+      for (var i=0;i<N;i++) {
+        var ang = (i/N)*Math.PI*2 - Math.PI/2;
+        var v = axes[i].val * p;
+        var x = cx + Math.cos(ang)*R*v;
+        var y = cy + Math.sin(ang)*R*v;
+        ctx.beginPath();
+        ctx.arc(x,y,3,0,Math.PI*2);
+        ctx.fillStyle = accent;
+        ctx.fill();
+      }
+    }
+
+    function animateRadar() {
+      if (progress >= 1) {
+        progress = 1;
+        drawRadar(1);
+        /* animate legend bars */
+        document.querySelectorAll('.radar-legend-fill').forEach(function(b) {
+          b.style.width = b.dataset.w;
+        });
+        return;
+      }
+      progress += 0.03;
+      drawRadar(progress);
+      requestAnimationFrame(animateRadar);
+    }
+
+    var radarDone = false;
+    function checkRadar() {
+      if (radarDone) return;
+      var rect = canvas.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.9) {
+        radarDone = true;
+        animateRadar();
+      }
+    }
+    window.addEventListener('scroll', checkRadar, {passive:true});
+    setTimeout(checkRadar, 500);
+
+    /* redraw on theme change */
+    var obs = new MutationObserver(function() {
+      drawRadar(progress);
+    });
+    obs.observe(document.body, {attributes:true, attributeFilter:['class']});
+  })();
+
+  /* ══════════════════════════════════
+     SCROLL-TRIGGERED LEGEND BARS
+  ══════════════════════════════════ */
+  (function() {
+    var legDone = false;
+    function check() {
+      if (legDone) return;
+      var wrap = document.getElementById('radar-legend');
+      if (!wrap) return;
+      var rect = wrap.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.9) {
+        legDone = true;
+        wrap.querySelectorAll('.radar-legend-fill').forEach(function(b) {
+          b.style.width = b.dataset.w;
+        });
+      }
+    }
+    window.addEventListener('scroll', check, {passive:true});
+    setTimeout(check, 600);
+  })();
+
+  /* ══════════════════════════════════
+     SCROLL PROGRESS + BACK TO TOP
+  ══════════════════════════════════ */
+  (function() {
+    var bar = document.getElementById('scroll-progress');
+    var btn = document.getElementById('back-top');
+    function onScroll() {
+      var scrolled = window.scrollY;
+      var total = document.documentElement.scrollHeight - window.innerHeight;
+      if (bar) bar.style.width = (total > 0 ? (scrolled/total)*100 : 0) + '%';
+      if (btn) btn.classList.toggle('visible', scrolled > 400);
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+  })();
 </script>
