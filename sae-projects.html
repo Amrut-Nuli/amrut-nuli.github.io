@@ -197,176 +197,225 @@
   <a href="https://www.linkedin.com/in/amrut-nuli/" target="_blank">linkedin.com/in/amrut-nuli</a>
 </footer>
 
-<script src="carousel.js"></script>
+  <script src="carousel.js"></script>
 <script>
 
   createCarousel(document.getElementById('c-sae2022'), [
-    { src: 'images/sae2022/01-cad-model.png',         caption: 'Skeleton CAD model — SolidWorks' },
-    { src: 'images/sae2022/02-manufactured.png',      caption: 'Manufactured RC aircraft' },
-    { src: 'images/sae2022/03-cfd.jpg',               caption: 'Overall plane CFD analysis' },
-    { src: 'images/sae2022/04-ansys.png',             caption: 'Fuselage structural analysis — ANSYS' },
-    { src: 'images/sae2022/05-downwashanalysis.png',  caption: 'Aerodynamic Downwash Analysis using XFLR5' },
+    { src: 'images/sae2022/01-cad-model.png',        caption: 'Skeleton CAD model — SolidWorks' },
+    { src: 'images/sae2022/02-manufactured.png',     caption: 'Manufactured RC aircraft' },
+    { src: 'images/sae2022/03-cfd.jpg',              caption: 'Overall plane CFD analysis' },
+    { src: 'images/sae2022/04-ansys.png',            caption: 'Fuselage structural analysis — ANSYS' },
+    { src: 'images/sae2022/05-downwashanalysis.png', caption: 'Aerodynamic Downwash Analysis using XFLR5' },
   ]);
-
   createCarousel(document.getElementById('c-aerothon2022'), [
     { src: 'images/aerothon2022/01-uav-specs.png',    caption: 'UAV specifications' },
     { src: 'images/aerothon2022/02-payload-mech.gif', caption: 'Payload dropping mechanism' },
     { src: 'images/aerothon2022/03-ansys.png',        caption: 'Structural analysis — ANSYS' },
     { src: 'images/aerothon2022/04-prototype.jpg',    caption: 'Manufactured UAV prototype' },
   ]);
-
   createCarousel(document.getElementById('c-aerothon2023'), [
-    { src: 'images/aerothon2023/01-cad-model.jpg',        caption: 'CAD model — SolidWorks' },
-    { src: 'images/aerothon2023/02-uav-specs.jpg',        caption: 'UAV specifications' },
-    { src: 'images/aerothon2023/03-mission-profile.jpg',  caption: 'SAE Aerothon 2023 mission profile' },
-    { src: 'images/aerothon2023/04-payload.gif',          caption: 'Payload dropping mechanism' },
-    { src: 'images/aerothon2023/05-cfd.png',              caption: 'Downwash analysis — ANSYS Fluent' },
-    { src: 'images/aerothon2023/06-prototype.jpeg',       caption: 'UAV prototype' },
+    { src: 'images/aerothon2023/01-cad-model.jpg',       caption: 'CAD model — SolidWorks' },
+    { src: 'images/aerothon2023/02-uav-specs.jpg',       caption: 'UAV specifications' },
+    { src: 'images/aerothon2023/03-mission-profile.jpg', caption: 'SAE Aerothon 2023 mission profile' },
+    { src: 'images/aerothon2023/04-payload.gif',         caption: 'Payload dropping mechanism' },
+    { src: 'images/aerothon2023/05-cfd.png',             caption: 'Downwash analysis — ANSYS Fluent' },
+    { src: 'images/aerothon2023/06-prototype.jpeg',      caption: 'UAV prototype' },
   ]);
 
-  function toggleCollapsible(el) {
-    el.classList.toggle('open');
-  }
-  
- function applyTheme(dark) {
+  function toggleCollapsible(el) { el.classList.toggle('open'); }
+
+  function applyTheme(dark) {
     document.body.classList.toggle('dark', dark);
     document.getElementById('icon-light').classList.toggle('active', !dark);
     document.getElementById('icon-dark').classList.toggle('active', dark);
   }
-
   function toggleTheme() {
     const isDark = document.body.classList.contains('dark');
     localStorage.setItem('theme', isDark ? 'light' : 'dark');
     applyTheme(!isDark);
   }
-
   applyTheme(localStorage.getItem('theme') === 'dark');
-/* ══ REPORT IMAGE VIEWER ══ */
-  var rvPages   = [];
-  var rvCurrent = 0;
-  var rvLoaded  = {};
 
-  function openRV(folder, totalPages, title, sub) {
-    rvPages   = totalPages;
-    rvCurrent = 1;
-    rvLoaded  = {};
+  /* ══════════════════════════════════════
+     REPORT IMAGE VIEWER — FIXED
+  ══════════════════════════════════════ */
+  var _rv = {
+    folder : '',
+    total  : 0,
+    cur    : 1,
+    token  : 0   /* incremented each open — cancels stale callbacks */
+  };
 
-    document.getElementById('rv-title').textContent = title;
-    document.getElementById('rv-sub').textContent   = sub;
+  function openRV(folder, total, title, sub) {
+    /* cancel any in-flight loads from a previous open */
+    _rv.token++;
+    var myToken = _rv.token;
+
+    _rv.folder = folder;
+    _rv.total  = total;
+    _rv.cur    = 1;
+
+    /* update header */
+    document.getElementById('rv-title').textContent   = title;
+    document.getElementById('rv-sub').textContent     = sub;
+    document.getElementById('rv-counter').textContent = total + ' pages';
+
+    /* reset body to a fresh spinner — built here, not relying on old DOM */
+    var body = document.getElementById('rv-body');
+    body.innerHTML =
+      '<div style="display:flex;flex-direction:column;align-items:center;' +
+      'justify-content:center;gap:14px;flex:1;padding:40px;">' +
+      '<div class="rv-spinner"></div>' +
+      '<div class="rv-spinner-text">Loading report...</div></div>';
+
+    /* reset nav */
+    document.getElementById('rv-nav-info').textContent = '1 / ' + total;
+    document.getElementById('rv-prev').disabled = true;
+    document.getElementById('rv-next').disabled = (total <= 1);
+
+    /* open modal */
     document.getElementById('rv-modal').classList.add('open');
     document.body.style.overflow = 'hidden';
 
-    document.getElementById('rv-loading').classList.remove('hide');
-    document.getElementById('rv-body').innerHTML =
-      '<div class="rv-loading" id="rv-loading"><div class="rv-spinner"></div>' +
-      '<div class="rv-loading-text">Loading report...</div></div>';
+    /* build page wrapper (hidden until first image loads) */
+    var wrapper = document.createElement('div');
+    wrapper.style.cssText =
+      'width:100%;display:flex;flex-direction:column;' +
+      'align-items:center;gap:14px;';
+    wrapper.id = 'rv-pages-' + myToken;
 
-    updateRVNav();
+    for (var i = 1; i <= total; i++) {
+      var pw = document.createElement('div');
+      pw.className = 'rv-page-wrap';
+      pw.id = 'rv-p-' + i + '-' + myToken;
+      pw.style.cssText = 'width:100%;max-width:700px;';
 
-    /* preload all pages */
-    var loaded = 0;
-    for (var i = 1; i <= totalPages; i++) {
-      (function(pageNum) {
+      /* placeholder */
+      var ph = document.createElement('div');
+      ph.style.cssText =
+        'width:100%;height:180px;background:rgba(255,255,255,0.04);' +
+        'border-radius:4px;display:flex;align-items:center;' +
+        'justify-content:center;';
+      ph.innerHTML =
+        '<span style="font-family:DM Mono,monospace;font-size:11px;' +
+        'color:rgba(255,255,255,0.2);">page ' + i + ' / ' + total + '</span>';
+
+      var lbl = document.createElement('div');
+      lbl.className   = 'rv-page-label';
+      lbl.textContent = i + ' / ' + total;
+
+      pw.appendChild(ph);
+      pw.appendChild(lbl);
+      wrapper.appendChild(pw);
+    }
+
+    /* load all images */
+    var firstLoaded = false;
+    for (var j = 1; j <= total; j++) {
+      (function(n, tok) {
+        var ext = 'png'; /* change to 'jpg' if your files are .jpg */
+        var src = folder + '/page-' + (n < 10 ? '0' : '') + n + '.' + ext;
         var img = new Image();
-        img.src = folder + '/page-' +
-                  (pageNum < 10 ? '0' : '') + pageNum + '.png';
-        img.onload = img.onerror = function() {
-          rvLoaded[pageNum] = img.src;
-          loaded++;
-          if (loaded === 1) renderRVPage(folder, 1, totalPages);
-          if (loaded === totalPages) {
-            document.getElementById('rv-loading') &&
-            document.getElementById('rv-loading').remove();
+
+        img.onload = function() {
+          if (tok !== _rv.token) return; /* stale — ignore */
+
+          var pw2 = document.getElementById('rv-p-' + n + '-' + tok);
+          if (!pw2) return;
+
+          /* replace placeholder with real image */
+          pw2.innerHTML = '';
+          var imgEl = document.createElement('img');
+          imgEl.src      = src;
+          imgEl.alt      = 'Page ' + n;
+          imgEl.draggable = false;
+          imgEl.style.cssText =
+            'width:100%;display:block;border-radius:4px;' +
+            'box-shadow:0 4px 24px rgba(0,0,0,0.6);' +
+            'pointer-events:none;-webkit-user-drag:none;';
+          imgEl.oncontextmenu = function() { return false; };
+
+          var lbl2 = document.createElement('div');
+          lbl2.className   = 'rv-page-label';
+          lbl2.textContent = n + ' / ' + total;
+
+          pw2.appendChild(imgEl);
+          pw2.appendChild(lbl2);
+
+          /* first image loaded — swap spinner for pages */
+          if (!firstLoaded) {
+            firstLoaded = true;
+            var b = document.getElementById('rv-body');
+            if (b && tok === _rv.token) {
+              b.innerHTML = '';
+              b.appendChild(wrapper);
+              setupScrollTracker(b, total, tok);
+            }
           }
         };
-      })(i);
+
+        img.onerror = function() {
+          if (tok !== _rv.token) return;
+          var pw3 = document.getElementById('rv-p-' + n + '-' + tok);
+          if (pw3) pw3.style.display = 'none';
+          if (!firstLoaded) {
+            firstLoaded = true;
+            var b2 = document.getElementById('rv-body');
+            if (b2 && tok === _rv.token) {
+              b2.innerHTML = '';
+              b2.appendChild(wrapper);
+            }
+          }
+        };
+
+        img.src = src;
+      })(j, myToken);
     }
   }
 
-  function renderRVPage(folder, page, total) {
-    var body = document.getElementById('rv-body');
-    var loading = document.getElementById('rv-loading');
-    if (loading) loading.classList.add('hide');
-
-    body.innerHTML = '';
-
-    var wrap = document.createElement('div');
-    wrap.style.cssText = 'width:100%; display:flex; flex-direction:column; align-items:center; gap:12px;';
-
-    for (var i = 1; i <= total; i++) {
-      var src = folder + '/page-' + (i < 10 ? '0' : '') + i + '.png';
-      var pageWrap = document.createElement('div');
-      pageWrap.style.cssText = 'width:100%; max-width:720px;';
-      pageWrap.id = 'rv-page-' + i;
-
-      var img = document.createElement('img');
-      img.src   = src;
-      img.alt   = 'Page ' + i;
-      img.style.cssText =
-        'width:100%; display:block; border-radius:4px;' +
-        'box-shadow:0 4px 20px rgba(0,0,0,0.5);' +
-        'pointer-events:none; -webkit-user-drag:none;';
-      img.setAttribute('draggable', 'false');
-      img.oncontextmenu = function() { return false; };
-
-      var num = document.createElement('div');
-      num.className   = 'rv-page-num';
-      num.textContent = i + ' / ' + total;
-
-      pageWrap.appendChild(img);
-      pageWrap.appendChild(num);
-      wrap.appendChild(pageWrap);
-    }
-
-    body.appendChild(wrap);
-
-    /* update counter */
-    document.getElementById('rv-counter').textContent = total + ' pages';
-
-    /* scroll observer to track current page */
-    if ('IntersectionObserver' in window) {
-      var obs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          if (e.isIntersecting) {
-            var pid = parseInt(e.target.id.replace('rv-page-', ''));
-            if (!isNaN(pid)) {
-              rvCurrent = pid;
-              document.getElementById('rv-nav-info').textContent =
-                pid + ' / ' + total;
-            }
+  function setupScrollTracker(body, total, tok) {
+    if (!('IntersectionObserver' in window)) return;
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting && tok === _rv.token) {
+          var n = parseInt(e.target.id.split('-')[2]);
+          if (!isNaN(n)) {
+            _rv.cur = n;
+            document.getElementById('rv-nav-info').textContent =
+              n + ' / ' + total;
+            document.getElementById('rv-prev').disabled = (n <= 1);
+            document.getElementById('rv-next').disabled = (n >= total);
           }
-        });
-      }, { root: body, threshold: 0.5 });
-      for (var j = 1; j <= total; j++) {
-        var el = document.getElementById('rv-page-' + j);
+        }
+      });
+    }, { root: body, threshold: 0.4 });
+
+    setTimeout(function() {
+      for (var k = 1; k <= total; k++) {
+        var el = document.getElementById('rv-p-' + k + '-' + tok);
         if (el) obs.observe(el);
       }
-    }
-
-    updateRVNav();
+    }, 200);
   }
 
   function rvChangePage(dir) {
-    var total = rvPages;
-    rvCurrent = Math.max(1, Math.min(total, rvCurrent + dir));
-    var el = document.getElementById('rv-page-' + rvCurrent);
+    _rv.cur = Math.max(1, Math.min(_rv.total, _rv.cur + dir));
+    var el = document.getElementById('rv-p-' + _rv.cur + '-' + _rv.token);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    updateRVNav();
-  }
-
-  function updateRVNav() {
-    var total = rvPages;
-    document.getElementById('rv-nav-info').textContent =
-      rvCurrent + ' / ' + total;
-    document.getElementById('rv-prev').disabled = (rvCurrent <= 1);
-    document.getElementById('rv-next').disabled = (rvCurrent >= total);
+    document.getElementById('rv-nav-info').textContent = _rv.cur + ' / ' + _rv.total;
+    document.getElementById('rv-prev').disabled = (_rv.cur <= 1);
+    document.getElementById('rv-next').disabled = (_rv.cur >= _rv.total);
   }
 
   function closeRV() {
+    _rv.token++; /* cancel any pending image loads */
     document.getElementById('rv-modal').classList.remove('open');
     document.getElementById('rv-body').innerHTML = '';
+    document.getElementById('rv-nav-info').textContent = '— / —';
+    document.getElementById('rv-prev').disabled = true;
+    document.getElementById('rv-next').disabled = true;
     document.body.style.overflow = '';
-    rvPages = []; rvCurrent = 0; rvLoaded = {};
+    _rv.folder = ''; _rv.total = 0; _rv.cur = 1;
   }
 
   document.addEventListener('keydown', function(e) {
@@ -375,38 +424,6 @@
     if (e.key === 'ArrowRight') rvChangePage(1);
     if (e.key === 'ArrowLeft')  rvChangePage(-1);
   });
+
 </script>
-<!-- ═══ REPORT VIEWER MODAL ═══ -->
-<div class="rv-overlay" id="rv-modal"
-     onclick="if(event.target===this)closeRV()">
-  <div class="rv-box">
 
-    <div class="rv-header">
-      <div class="rv-header-left">
-        <div class="rv-header-title" id="rv-title">Project Report</div>
-        <div class="rv-header-sub"   id="rv-sub"></div>
-      </div>
-      <div class="rv-header-right">
-        <span class="rv-page-counter" id="rv-counter"></span>
-        <button class="rv-close" onclick="closeRV()">✕</button>
-      </div>
-    </div>
-
-    <div class="rv-body" id="rv-body"
-         oncontextmenu="return false;">
-      <div class="rv-loading" id="rv-loading">
-        <div class="rv-spinner"></div>
-        <div class="rv-loading-text">Loading report...</div>
-      </div>
-    </div>
-
-    <div class="rv-nav">
-      <button class="rv-nav-btn" id="rv-prev" onclick="rvChangePage(-1)">← Prev</button>
-      <span   class="rv-nav-info" id="rv-nav-info">— / —</span>
-      <button class="rv-nav-btn" id="rv-next" onclick="rvChangePage(1)">Next →</button>
-    </div>
-
-  </div>
-</div>
-</body>
-</html>
