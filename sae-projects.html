@@ -325,8 +325,21 @@
       wrapper.appendChild(pw);
     }
 
-    /* load images */
-    var firstLoaded = false;
+    /* load images — swap spinner once first response arrives (load OR error) */
+    var settled   = 0;   /* count of pages that have loaded or errored */
+    var swapped   = false; /* have we replaced the spinner yet? */
+
+    function maybeSwap(tok) {
+      if (swapped || tok !== _rv.token) return;
+      swapped = true;
+      var b = document.getElementById('rv-body');
+      if (b && tok === _rv.token) {
+        b.innerHTML = '';
+        b.appendChild(wrapper);
+        setupScrollTracker(b, total, tok);
+      }
+    }
+
     for (var j = 1; j <= total; j++) {
       (function(n, tok) {
         var src = folder + '/page-' + (n < 10 ? '0' : '') + n + '.png';
@@ -334,13 +347,17 @@
 
         img.onload = function () {
           if (tok !== _rv.token) return;
+
+          /* swap spinner → pages on first settled image */
+          maybeSwap(tok);
+
           var pw2 = document.getElementById('rv-p-' + n + '-' + tok);
           if (!pw2) return;
 
           pw2.innerHTML = '';
           var imgEl = document.createElement('img');
-          imgEl.src   = src;
-          imgEl.alt   = 'Page ' + n;
+          imgEl.src       = src;
+          imgEl.alt       = 'Page ' + n;
           imgEl.className = 'rv-page-img';
           imgEl.draggable = false;
           imgEl.oncontextmenu = function () { return false; };
@@ -352,25 +369,41 @@
           pw2.appendChild(imgEl);
           pw2.appendChild(lbl2);
 
-          if (!firstLoaded) {
-            firstLoaded = true;
-            var b = document.getElementById('rv-body');
-            if (b && tok === _rv.token) {
-              b.innerHTML = '';
-              b.appendChild(wrapper);
-              setupScrollTracker(b, total, tok);
-            }
-          }
+          settled++;
         };
 
         img.onerror = function () {
           if (tok !== _rv.token) return;
+          settled++;
+
+          /* still swap spinner so user sees an error state, not eternal loading */
+          maybeSwap(tok);
+
           var pw3 = document.getElementById('rv-p-' + n + '-' + tok);
-          if (pw3) pw3.style.display = 'none';
-          if (!firstLoaded) {
-            firstLoaded = true;
-            var b2 = document.getElementById('rv-body');
-            if (b2 && tok === _rv.token) { b2.innerHTML = ''; b2.appendChild(wrapper); }
+          if (!pw3) return;
+
+          /* show a clear error placeholder instead of just hiding */
+          pw3.innerHTML =
+            '<div style="width:100%;padding:28px 0;text-align:center;' +
+            'background:rgba(255,255,255,0.04);border-radius:4px;' +
+            'font-family:\'DM Mono\',monospace;font-size:12px;color:rgba(255,255,255,0.3);">' +
+            '⚠ Page ' + n + ' could not be loaded' +
+            '</div>';
+
+          /* if ALL pages errored, show a helpful message */
+          if (settled === total && tok === _rv.token) {
+            var b3 = document.getElementById('rv-body');
+            if (b3) {
+              b3.innerHTML =
+                '<div style="display:flex;flex-direction:column;align-items:center;' +
+                'justify-content:center;gap:16px;flex:1;padding:48px;text-align:center;">' +
+                '<div style="font-size:32px;">📄</div>' +
+                '<div style="font-family:\'DM Mono\',monospace;font-size:13px;color:rgba(255,255,255,0.6);">' +
+                'Report images not found.<br>' +
+                '<span style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:8px;display:block;">' +
+                'Expected: ' + folder + '/page-01.png … page-0' + total + '.png' +
+                '</span></div></div>';
+            }
           }
         };
 
