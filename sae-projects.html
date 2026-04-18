@@ -19,7 +19,7 @@
     <li><a href="certifications.html">Certifications</a></li>
     <li><a href="research.html">Research</a></li>
   </ul>
-   <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Toggle dark/light mode">
+  <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Toggle dark/light mode">
     <span class="theme-toggle-icon" id="icon-light">☀️</span>
     <span class="theme-toggle-icon" id="icon-dark">🌙</span>
   </button>
@@ -33,7 +33,7 @@
     <div class="page-sub">National-level aerospace design competitions — aircraft, UAVs, and autonomous systems.</div>
   </div>
 
-  <!-- ── PROJECT 1 ── -->
+  <!-- ── PROJECT 1 — SAE ADC 2022 ── -->
   <div class="project-card">
     <div class="project-header">
       <div class="project-title">Regular Class RC Aircraft — SAE Aero Design Challenge 2022</div>
@@ -41,18 +41,14 @@
     </div>
     <div class="project-date">Oct 2021 – Sep 2022 &nbsp;·&nbsp; Member, AeroKLE Aero Design Team</div>
 
-    <!-- CAROUSEL
-         Put your images in: images/sae2022/
-         Rename them exactly as listed in src below, OR update the src paths to match your file names. -->
     <div class="carousel" id="c-sae2022"></div>
 
     <p class="project-obj">
-      Objective: Design a low-speed aircraft that carries maximum payload with empty weight &lt;5 kg, subject to
+      Design a low-speed aircraft that carries maximum payload with empty weight &lt;5 kg, subject to
       design and material constraints, and successfully fly within SAE-specified takeoff and landing distances.
     </p>
-    
+
     <div class="tools-row">
-      
       <span class="tool-tag">SolidWorks</span>
       <span class="tool-tag">ANSYS</span>
       <span class="tool-tag">XFLR5</span>
@@ -61,14 +57,10 @@
       <span class="tool-tag">Laser Cutting</span>
       <span class="tool-tag">Sheet Metal</span>
       <span class="tool-tag">3D Printing</span>
-      
     </div>
 
-      <p class="project-obj">
-         My Role:
-        </p>
+    <p class="project-obj" style="margin-top:14px;">My Role:</p>
     <ul class="project-bullets">
-      
       <li><strong>Structures:</strong> CG calculations and ANSYS topology optimization of fuselage assemblies and components.</li>
       <li><strong>Aerodynamics:</strong> Airfoil selection and L/D ratio optimization for low-speed flight using XFLR5.</li>
       <li><strong>CAD &amp; Drafting:</strong> 3D wing and tail assemblies in SolidWorks with manufacturing-ready 2D drawings.</li>
@@ -85,56 +77,57 @@
       <div style="display:grid; gap:6px;">
         <div>
           <div style="font-size:11px; color:var(--text3); margin-bottom:4px; font-family:'DM Mono',monospace;">Baseline conventional spar</div>
-          <div class="result-bar-track">
-            <div class="result-bar-fill green" style="width:0%" data-width="72%"></div>
-          </div>
+          <div class="result-bar-track"><div class="result-bar-fill green" style="width:0%" data-width="72%"></div></div>
         </div>
         <div>
           <div style="font-size:11px; color:var(--text3); margin-bottom:4px; font-family:'DM Mono',monospace;">Balsa-birch composite spar (+15.4%)</div>
-          <div class="result-bar-track">
-            <div class="result-bar-fill" style="width:0%" data-width="87%"></div>
-          </div>
+          <div class="result-bar-track"><div class="result-bar-fill" style="width:0%" data-width="87%"></div></div>
         </div>
       </div>
       <div class="result-bar-note">Bending flexure test — sandwiched balsa-birch plywood construction</div>
     </div>
-<div class="collapsible" onclick="toggleCollapsible(this)">
-  <div class="collapsible-header">
-    <span class="collapsible-title">General Specifications</span>
-    <span class="collapsible-icon">▼</span>
-  </div>
-  <div class="collapsible-body">
-    <div class="label" style="margin-bottom:10px;">Key specs</div>
-    <table class="spec-table">
-      <tr><td>Wingspan</td><td>2.4 m (94.5 in)</td></tr>
-      <tr><td>Empty weight</td><td>5 kg</td></tr>
-      <tr><td>Max takeoff weight</td><td>14 kg</td></tr>
-      <tr><td>Payload carried</td><td>9 kg</td></tr>
-      <tr><td>Airfoil</td><td>Fx74-C15-140</td></tr>
-      <tr><td>Cruise speed</td><td>15.11 m/s</td></tr>
-      <tr><td>Stall speed</td><td>10.34 m/s</td></tr>
-      <tr><td>Takeoff distance</td><td>34.33 m</td></tr>
-    </table>
 
+    <div class="collapsible" onclick="toggleCollapsible(this)">
+      <div class="collapsible-header">
+        <span class="collapsible-title">General Specifications</span>
+        <span class="collapsible-icon">▼</span>
+      </div>
+      <div class="collapsible-body">
+        <table class="spec-table">
+          <tr><td>Wingspan</td><td>2.4 m (94.5 in)</td></tr>
+          <tr><td>Empty weight</td><td>5 kg</td></tr>
+          <tr><td>Max takeoff weight</td><td>14 kg</td></tr>
+          <tr><td>Payload carried</td><td>9 kg</td></tr>
+          <tr><td>Airfoil</td><td>Fx74-C15-140</td></tr>
+          <tr><td>Cruise speed</td><td>15.11 m/s</td></tr>
+          <tr><td>Stall speed</td><td>10.34 m/s</td></tr>
+          <tr><td>Takeoff distance</td><td>34.33 m</td></tr>
+        </table>
+      </div>
     </div>
-</div>
-<div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; align-items:center;">
-  <a href="https://drive.google.com/file/d/1tQbfBQ1asU3lTxCbpDRwIHP8BrB_DIwG/view"
-     target="_blank"
-     style="display:inline-flex; align-items:center; gap:8px;
-            font-size:13px; font-weight:500;
-            background:var(--accent-dim); color:var(--accent);
-            border:1px solid var(--accent-border);
-            border-radius:20px; padding:8px 18px;
-            text-decoration:none;
-            transition:background 0.15s;">
-    ▶&nbsp; Watch flight video of RC Aircraft at SAE ADC 2022 event carrying 9Kg payload
-  </a>
-</div>
-   <button class="report-btn" onclick="openPDF('reports/sae-adc-2022.pdf','SAE Aero Design Challenge 2022 — RC Aircraft','Structural analysis · Aerodynamics · Manufacturing','https://www.papermark.com/view/cmmnq4bdk0006lc04gyyun6wr')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Quick Look — Summary Report</button>
+
+    <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; align-items:center;">
+      <a href="https://drive.google.com/file/d/1tQbfBQ1asU3lTxCbpDRwIHP8BrB_DIwG/view"
+         target="_blank"
+         style="display:inline-flex; align-items:center; gap:8px; font-size:13px;
+                font-weight:500; background:var(--accent-dim); color:var(--accent);
+                border:1px solid var(--accent-border); border-radius:20px;
+                padding:8px 18px; text-decoration:none;">
+        ▶&nbsp; Watch flight video
+      </a>
+      <button class="report-btn" onclick="openRV('images/reports/sae-adc-2022', 7, 'SAE Aero Design Challenge 2022 — RC Aircraft', 'Structural analysis · Aerodynamics · Manufacturing')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+          <polyline points="14,2 14,8 20,8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+        View Summary Report
+      </button>
+    </div>
   </div>
 
-  <!-- ── PROJECT 2 ── -->
+  <!-- ── PROJECT 2 — AEROTHON 2022 ── -->
   <div class="project-card">
     <div class="project-header">
       <div class="project-title">Multirotor UAV for Precision Cargo Delivery — SAE Aerothon 2022</div>
@@ -145,34 +138,38 @@
     <div class="carousel" id="c-aerothon2022"></div>
 
     <p class="project-obj">
-      Objective: Design, build, and fly a stable, efficient multirotor UAV capable of delivering cargo to a
-      specified location using both manual and autonomous approaches — total takeoff weight &lt;1.8 kg, T/W ratio &gt;2.
+      Design, build, and fly a stable, efficient multirotor UAV capable of delivering cargo to a
+      specified location — total takeoff weight &lt;1.8 kg, T/W ratio &gt;2.
     </p>
-<div class="tools-row">
-  
+
+    <div class="tools-row">
       <span class="tool-tag">SolidWorks</span>
       <span class="tool-tag">ANSYS</span>
       <span class="tool-tag">Ultimaker CURA</span>
       <span class="tool-tag">Topology Optimization</span>
       <span class="tool-tag">Impact Analysis</span>
-  
     </div>
-    
-      <p class="project-obj">
-         My Role:
-        </p>
-      <ul class="project-bullets">
-        
-      <li><strong>Design &amp; Optimization:</strong> Engineered UAV rotor hub and components using SolidWorks and ANSYS topology optimization to maintain total weight &lt;1.8 kg.</li>
-      <li><strong>Structural Analysis:</strong> Impact analysis on landing gear using ANSYS to ensure integrity during high-stress recovery phases.</li>
-      <li><strong>Materials:</strong> Developed a comprehensive Material Selection Matrix aligned with 3D printing capabilities.</li>
+
+    <p class="project-obj" style="margin-top:14px;">My Role:</p>
+    <ul class="project-bullets">
+      <li><strong>Design &amp; Optimization:</strong> Engineered UAV rotor hub and components using SolidWorks and ANSYS topology optimization — weight &lt;1.8 kg.</li>
+      <li><strong>Structural Analysis:</strong> Impact analysis on landing gear using ANSYS during high-stress recovery phases.</li>
+      <li><strong>Materials:</strong> Developed a Material Selection Matrix aligned with 3D printing capabilities.</li>
       <li><strong>Additive Manufacturing:</strong> Optimized slicing parameters in Ultimaker CURA for ideal strength-to-weight ratio.</li>
     </ul>
 
-   <button class="report-btn" onclick="openPDF('reports/aerothon-2022.pdf','SAE Aerothon 2022 — Precision Cargo UAV','Topology optimization · Impact analysis · Additive manufacturing','https://www.papermark.com/view/cmmnmfp710001la04xfdl3rt6')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Quick Look — Summary Report</button>
+    <button class="report-btn" onclick="openRV('images/reports/aerothon-2022', 6, 'SAE Aerothon 2022 — Precision Cargo UAV', 'Topology optimization · Impact analysis · Additive manufacturing')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+        <polyline points="14,2 14,8 20,8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+      </svg>
+      View Summary Report
+    </button>
   </div>
 
-  <!-- ── PROJECT 3 ── -->
+  <!-- ── PROJECT 3 — AEROTHON 2023 ── -->
   <div class="project-card">
     <div class="project-header">
       <div class="project-title">Tactical Multirotor UAV — SAE Aerothon 2023</div>
@@ -183,30 +180,25 @@
     <div class="carousel" id="c-aerothon2023"></div>
 
     <p class="project-obj">
-      Objective: Design a micro-category multirotor UAV (takeoff weight &lt;2 kg) for controlled takeoff, autonomous
+      Design a micro-category multirotor UAV (takeoff weight &lt;2 kg) for controlled takeoff, autonomous
       navigation, hotspot target identification, precision payload drop, and safe return within stipulated time.
     </p>
-    
-<div class="tools-row">
-  
+
+    <div class="tools-row">
       <span class="tool-tag">SolidWorks</span>
       <span class="tool-tag">ANSYS Fluent</span>
       <span class="tool-tag">CFD</span>
       <span class="tool-tag">Topology Optimization</span>
       <span class="tool-tag">Additive Manufacturing</span>
-  
     </div>
-    
-      <p class="project-obj">
-         My Role:
-        </p>
+
+    <p class="project-obj" style="margin-top:14px;">My Role:</p>
     <ul class="project-bullets">
-      
       <li><strong>Strategic Leadership:</strong> Led conceptual design and structural analysis phases end-to-end as project captain.</li>
       <li><strong>Advanced CFD:</strong> High-fidelity ANSYS Fluent analysis to mitigate downwash effects and ensure flight stability.</li>
       <li><strong>Weight Optimization:</strong> Topology optimization (ANSYS) to achieve target T/W ratio &gt;2.0.</li>
-      <li><strong>Systems Integration:</strong> Managed cross-functional mechanical and avionic timelines through mission testing.</li>
       <li><strong>Manufacturing:</strong> Additive manufacturing parameter optimization — reduced print time by 65%, component weight by 40%.</li>
+      <li><strong>Systems Integration:</strong> Managed cross-functional mechanical and avionic timelines through mission testing.</li>
     </ul>
 
     <div class="result-bar-wrap result-anim" style="margin-top:18px;">
@@ -217,21 +209,25 @@
       <div style="display:grid; gap:6px;">
         <div>
           <div style="font-size:11px; color:var(--text3); margin-bottom:4px; font-family:'DM Mono',monospace;">Before topology optimization</div>
-          <div class="result-bar-track">
-            <div class="result-bar-fill red" style="width:0%" data-width="100%"></div>
-          </div>
+          <div class="result-bar-track"><div class="result-bar-fill red" style="width:0%" data-width="100%"></div></div>
         </div>
         <div>
           <div style="font-size:11px; color:var(--text3); margin-bottom:4px; font-family:'DM Mono',monospace;">After generative design (−40%)</div>
-          <div class="result-bar-track">
-            <div class="result-bar-fill green" style="width:0%" data-width="60%"></div>
-          </div>
+          <div class="result-bar-track"><div class="result-bar-fill green" style="width:0%" data-width="60%"></div></div>
         </div>
       </div>
       <div class="result-bar-note">SolidWorks modelling · ANSYS topology optimization · T/W ratio &gt;2.0 maintained</div>
     </div>
 
-   <button class="report-btn" onclick="openPDF('reports/aerothon-2023.pdf','SAE Aerothon 2023 — Tactical Multirotor UAV','CFD downwash · Topology optimization · Mission profile','https://www.papermark.com/view/cmmnn4xif000al504mrufzq5y')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Quick Look — Summary Report</button>
+    <button class="report-btn" onclick="openRV('images/reports/aerothon-2023', 6, 'SAE Aerothon 2023 — Tactical Multirotor UAV', 'CFD downwash · Topology optimization · Mission profile')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+        <polyline points="14,2 14,8 20,8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+      </svg>
+      View Summary Report
+    </button>
   </div>
 
 </main>
@@ -241,15 +237,45 @@
   <a href="https://www.linkedin.com/in/amrut-nuli/" target="_blank">linkedin.com/in/amrut-nuli</a>
 </footer>
 
+<!-- ═══ REPORT IMAGE VIEWER MODAL ═══ -->
+<div class="rv-overlay" id="rv-modal"
+     onclick="if(event.target===this)closeRV()">
+  <div class="rv-box">
+    <div class="rv-header">
+      <div class="rv-header-left">
+        <div class="rv-header-title" id="rv-title">Project Report</div>
+        <div class="rv-header-sub"   id="rv-sub"></div>
+      </div>
+      <div class="rv-header-right">
+        <span class="rv-counter" id="rv-counter"></span>
+        <button class="rv-close" onclick="closeRV()">✕</button>
+      </div>
+    </div>
+    <div class="rv-body" id="rv-body"
+         oncontextmenu="return false;">
+      <div class="rv-spinner-wrap" id="rv-spinner">
+        <div class="rv-spinner"></div>
+        <div class="rv-spinner-text">Loading report...</div>
+      </div>
+    </div>
+    <div class="rv-nav">
+      <button class="rv-nav-btn" id="rv-prev" onclick="rvGo(-1)">← Prev</button>
+      <span   class="rv-nav-info" id="rv-nav-info">— / —</span>
+      <button class="rv-nav-btn" id="rv-next" onclick="rvGo(1)">Next →</button>
+    </div>
+  </div>
+</div>
+
 <script src="carousel.js"></script>
 <script>
 
+  /* ── CAROUSELS ── */
   createCarousel(document.getElementById('c-sae2022'), [
-    { src: 'images/sae2022/01-cad-model.png',         caption: 'Skeleton CAD model — SolidWorks' },
-    { src: 'images/sae2022/02-manufactured.png',      caption: 'Manufactured RC aircraft' },
-    { src: 'images/sae2022/03-cfd.jpg',               caption: 'Overall plane CFD analysis' },
-    { src: 'images/sae2022/04-ansys.png',             caption: 'Fuselage structural analysis — ANSYS' },
-    { src: 'images/sae2022/05-downwashanalysis.png',  caption: 'Aerodynamic Downwash Analysis using XFLR5' },
+    { src: 'images/sae2022/01-cad-model.png',        caption: 'Skeleton CAD model — SolidWorks' },
+    { src: 'images/sae2022/02-manufactured.png',     caption: 'Manufactured RC aircraft' },
+    { src: 'images/sae2022/03-cfd.jpg',              caption: 'Overall plane CFD analysis' },
+    { src: 'images/sae2022/04-ansys.png',            caption: 'Fuselage structural analysis — ANSYS' },
+    { src: 'images/sae2022/05-downwashanalysis.png', caption: 'Aerodynamic Downwash Analysis using XFLR5' },
   ]);
 
   createCarousel(document.getElementById('c-aerothon2022'), [
@@ -260,43 +286,42 @@
   ]);
 
   createCarousel(document.getElementById('c-aerothon2023'), [
-    { src: 'images/aerothon2023/01-cad-model.jpg',        caption: 'CAD model — SolidWorks' },
-    { src: 'images/aerothon2023/02-uav-specs.jpg',        caption: 'UAV specifications' },
-    { src: 'images/aerothon2023/03-mission-profile.jpg',  caption: 'SAE Aerothon 2023 mission profile' },
-    { src: 'images/aerothon2023/04-payload.gif',          caption: 'Payload dropping mechanism' },
-    { src: 'images/aerothon2023/05-cfd.png',              caption: 'Downwash analysis — ANSYS Fluent' },
-    { src: 'images/aerothon2023/06-prototype.jpeg',       caption: 'UAV prototype' },
+    { src: 'images/aerothon2023/01-cad-model.jpg',       caption: 'CAD model — SolidWorks' },
+    { src: 'images/aerothon2023/02-uav-specs.jpg',       caption: 'UAV specifications' },
+    { src: 'images/aerothon2023/03-mission-profile.jpg', caption: 'SAE Aerothon 2023 mission profile' },
+    { src: 'images/aerothon2023/04-payload.gif',         caption: 'Payload dropping mechanism' },
+    { src: 'images/aerothon2023/05-cfd.png',             caption: 'Downwash analysis — ANSYS Fluent' },
+    { src: 'images/aerothon2023/06-prototype.jpeg',      caption: 'UAV prototype' },
   ]);
 
+  /* ── COLLAPSIBLE ── */
   function toggleCollapsible(el) {
     el.classList.toggle('open');
   }
-  
- function applyTheme(dark) {
+
+  /* ── THEME ── */
+  function applyTheme(dark) {
     document.body.classList.toggle('dark', dark);
     document.getElementById('icon-light').classList.toggle('active', !dark);
     document.getElementById('icon-dark').classList.toggle('active', dark);
   }
-
   function toggleTheme() {
     const isDark = document.body.classList.contains('dark');
     localStorage.setItem('theme', isDark ? 'light' : 'dark');
     applyTheme(!isDark);
   }
-
   applyTheme(localStorage.getItem('theme') === 'dark');
-/* ── ANIMATED BAR CHARTS ON SCROLL ── */
+
+  /* ── ANIMATED BAR CHARTS ── */
   (function() {
     function animateBars() {
       document.querySelectorAll('.result-anim').forEach(function(wrap) {
-        const rect = wrap.getBoundingClientRect();
+        var rect = wrap.getBoundingClientRect();
         if (rect.top < window.innerHeight * 0.88 && !wrap.dataset.animated) {
           wrap.dataset.animated = 'true';
           wrap.querySelectorAll('.result-bar-fill').forEach(function(bar) {
-            const target = bar.dataset.width || '0%';
-            setTimeout(function() {
-              bar.style.width = target;
-            }, 100);
+            var target = bar.dataset.width || '0%';
+            setTimeout(function() { bar.style.width = target; }, 100);
           });
         }
       });
@@ -304,86 +329,144 @@
     window.addEventListener('scroll', animateBars, { passive: true });
     setTimeout(animateBars, 400);
   })();
-/* ══ PDF MODAL ══ */
-  function openPDF(path, title, sub, fallback) {
-    document.getElementById('pdf-title').textContent   = title;
-    document.getElementById('pdf-sub').textContent     = sub;
-    document.getElementById('pdf-ext').href            = fallback;
-    document.getElementById('pdf-fallback-link').href  = fallback;
-    document.getElementById('pdf-fallback').classList.remove('show');
-    document.getElementById('pdf-spinner').classList.remove('hide');
-    document.getElementById('pdf-frame').src = '';
-    document.getElementById('pdf-modal').classList.add('open');
+
+  /* ══ REPORT IMAGE VIEWER ══ */
+  var _rvFolder = '';
+  var _rvTotal  = 0;
+  var _rvCur    = 1;
+
+  function openRV(folder, total, title, sub) {
+    _rvFolder = folder;
+    _rvTotal  = total;
+    _rvCur    = 1;
+
+    document.getElementById('rv-title').textContent   = title;
+    document.getElementById('rv-sub').textContent     = sub;
+    document.getElementById('rv-counter').textContent = total + ' pages';
+    document.getElementById('rv-modal').classList.add('open');
     document.body.style.overflow = 'hidden';
 
-    /* load PDF — show fallback if it fails after 6 seconds */
-    setTimeout(function() {
-      var frame = document.getElementById('pdf-frame');
-      try {
-        if (!frame.contentDocument ||
-            frame.contentDocument.body.innerHTML === '') {
-          showPDFFallback(fallback);
+    var body = document.getElementById('rv-body');
+    body.innerHTML =
+      '<div class="rv-spinner-wrap" id="rv-spinner">' +
+      '<div class="rv-spinner"></div>' +
+      '<div class="rv-spinner-text">Loading report...</div></div>';
+
+    rvUpdateNav();
+    rvLoadAll(folder, total);
+  }
+
+  function rvLoadAll(folder, total) {
+    var body    = document.getElementById('rv-body');
+    var wrapper = document.createElement('div');
+    wrapper.style.cssText =
+      'width:100%; display:flex; flex-direction:column;' +
+      'align-items:center; gap:14px;';
+    wrapper.id = 'rv-pages';
+
+    for (var i = 1; i <= total; i++) {
+      var pw = document.createElement('div');
+      pw.className = 'rv-page-wrap';
+      pw.id = 'rv-p-' + i;
+
+      var ph = document.createElement('div');
+      ph.style.cssText =
+        'width:100%; height:200px;' +
+        'background:rgba(255,255,255,0.04);' +
+        'border-radius:4px; display:flex;' +
+        'align-items:center; justify-content:center;';
+      ph.innerHTML =
+        '<span style="font-family:DM Mono,monospace;font-size:11px;' +
+        'color:rgba(255,255,255,0.2);">loading page ' + i + '...</span>';
+      pw.appendChild(ph);
+
+      var lbl = document.createElement('div');
+      lbl.className   = 'rv-page-label';
+      lbl.textContent = i + ' / ' + total;
+      pw.appendChild(lbl);
+
+      wrapper.appendChild(pw);
+    }
+
+    body.innerHTML = '';
+    body.appendChild(wrapper);
+
+    for (var j = 1; j <= total; j++) {
+      (function(n) {
+        var src = folder + '/page-' + (n < 10 ? '0' : '') + n + '.jpg';
+        var img = new Image();
+        img.onload = function() {
+          var pw2 = document.getElementById('rv-p-' + n);
+          if (!pw2) return;
+          pw2.innerHTML = '';
+          var imgEl = document.createElement('img');
+          imgEl.src = src;
+          imgEl.alt = 'Page ' + n;
+          imgEl.draggable = false;
+          imgEl.oncontextmenu = function() { return false; };
+          var lbl2 = document.createElement('div');
+          lbl2.className   = 'rv-page-label';
+          lbl2.textContent = n + ' / ' + _rvTotal;
+          pw2.appendChild(imgEl);
+          pw2.appendChild(lbl2);
+        };
+        img.onerror = function() {
+          var pw3 = document.getElementById('rv-p-' + n);
+          if (pw3) pw3.style.display = 'none';
+        };
+        img.src = src;
+      })(j);
+    }
+
+    /* scroll tracker */
+    if ('IntersectionObserver' in window) {
+      setTimeout(function() {
+        var obs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (e.isIntersecting) {
+              var n2 = parseInt(e.target.id.replace('rv-p-', ''));
+              if (!isNaN(n2)) {
+                _rvCur = n2;
+                rvUpdateNav();
+              }
+            }
+          });
+        }, { root: body, threshold: 0.3 });
+        for (var k = 1; k <= total; k++) {
+          var el = document.getElementById('rv-p-' + k);
+          if (el) obs.observe(el);
         }
-      } catch(e) {
-        /* cross-origin — PDF likely loaded fine, do nothing */
-      }
-    }, 6000);
-
-    document.getElementById('pdf-frame').src = path;
+      }, 400);
+    }
   }
 
-  function showPDFFallback(url) {
-    document.getElementById('pdf-spinner').classList.add('hide');
-    document.getElementById('pdf-fallback').classList.add('show');
-    document.getElementById('pdf-fallback-link').href = url;
+  function rvGo(dir) {
+    _rvCur = Math.max(1, Math.min(_rvTotal, _rvCur + dir));
+    var el = document.getElementById('rv-p-' + _rvCur);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    rvUpdateNav();
   }
 
-  function closePDF() {
-    document.getElementById('pdf-modal').classList.remove('open');
-    document.getElementById('pdf-frame').src = '';
-    document.getElementById('pdf-spinner').classList.remove('hide');
-    document.getElementById('pdf-fallback').classList.remove('show');
+  function rvUpdateNav() {
+    document.getElementById('rv-nav-info').textContent = _rvCur + ' / ' + _rvTotal;
+    document.getElementById('rv-prev').disabled = (_rvCur <= 1);
+    document.getElementById('rv-next').disabled = (_rvCur >= _rvTotal);
+  }
+
+  function closeRV() {
+    document.getElementById('rv-modal').classList.remove('open');
+    document.getElementById('rv-body').innerHTML = '';
     document.body.style.overflow = '';
+    _rvFolder = ''; _rvTotal = 0; _rvCur = 1;
   }
+
+  document.addEventListener('keydown', function(e) {
+    if (!document.getElementById('rv-modal').classList.contains('open')) return;
+    if (e.key === 'Escape')     closeRV();
+    if (e.key === 'ArrowRight') rvGo(1);
+    if (e.key === 'ArrowLeft')  rvGo(-1);
+  });
+
 </script>
-<!-- ═══ SHARED PDF MODAL ═══ -->
-<div class="pdf-overlay" id="pdf-modal"
-     onclick="if(event.target===this)closePDF()">
-  <div class="pdf-box">
-    <div class="pdf-header">
-      <div style="flex:1; min-width:0;">
-        <div class="pdf-header-title" id="pdf-title">Project Report</div>
-        <div class="pdf-header-sub" id="pdf-sub"></div>
-      </div>
-      <div class="pdf-header-right">
-        <a class="pdf-ext-btn" id="pdf-ext" href="#" target="_blank">↗ Open full</a>
-        <button class="pdf-close-btn" onclick="closePDF()">✕</button>
-      </div>
-    </div>
-    <div class="pdf-body">
-      <div class="pdf-spinner-wrap" id="pdf-spinner">
-        <div class="pdf-spinner"></div>
-        <div class="pdf-spinner-text">Loading report...</div>
-      </div>
-      <iframe id="pdf-frame" src="" title="Project Report"
-              onload="document.getElementById('pdf-spinner').classList.add('hide')">
-      </iframe>
-      <div class="pdf-fallback" id="pdf-fallback">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="1.5" style="opacity:0.25">
-          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-          <polyline points="14,2 14,8 20,8"/>
-          <line x1="16" y1="13" x2="8" y2="13"/>
-          <line x1="16" y1="17" x2="8" y2="17"/>
-        </svg>
-        <div class="pdf-fallback-msg">
-          PDF preview is not available.<br/>
-          <a class="pdf-fallback-link" id="pdf-fallback-link"
-             href="#" target="_blank">Click here to open the full report ↗</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 </body>
 </html>
