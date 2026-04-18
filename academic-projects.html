@@ -113,7 +113,10 @@
       speeds, assess vibrational mode stability, and enhance dynamic response by integrating hybrid
       bearing technologies.
     </p>
-    
+    <button class="quick-look-btn" onclick="openModal('modal-axle-calcs')"
+        style="margin-top:18px;">
+  📊 &nbsp;Quick Look at Calculations
+</button>
       <div class="tools-row">
         
       <span class="tool-tag">SolidWorks</span>
@@ -492,6 +495,112 @@
     </div>
   </div>
 </div>
-  
+  <!-- ═══════════════════════════════════════════════════
+     MODAL — AXLE CALCULATIONS
+════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-axle-calcs"
+     onclick="handleOverlayClick(event,'modal-axle-calcs')">
+  <div class="modal-box" style="max-width:900px;">
+
+    <!-- Sticky header -->
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Axle — Design Calculations</div>
+        <div class="modal-sub">
+          Critical Rotational speed · Torsional & Stress analysis· bearing life calcs · Campbell diagram
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-axle-calcs')">✕</button>
+    </div>
+
+    <!-- Scrollable body — images stacked -->
+    <div class="modal-body" style="padding:0;">
+
+      <!-- Section 1 -->
+      <div style="padding:20px 28px 0;">
+        <div class="modal-section-label">1 — final consolidated results </div>
+      </div>
+      <div style="padding:0 28px 24px;">
+        <img src="images/academic/axle/calc-1.PNG"
+             alt="final consolidated results "
+             style="width:100%; height:auto; display:block;
+                    border-radius:var(--radius-sm);
+                    border:1px solid var(--border);"/>
+      </div>
+
+      <div style="height:1px; background:var(--border); margin:0 28px;"></div>
+
+      <!-- Section 2 -->
+      <div style="padding:20px 28px 0;">
+        <div class="modal-section-label">2 — shaft speed &amp; critical speed;</div>
+      </div>
+      <div style="padding:0 28px 24px;">
+        <img src="images/academic/axle/calc-2.PNG"
+             alt="shaft and critical speed"
+             style="width:100%; height:auto; display:block;
+                    border-radius:var(--radius-sm);
+                    border:1px solid var(--border);"/>
+      </div>
+
+      <div style="height:1px; background:var(--border); margin:0 28px;"></div>
+
+      <!-- Section 3 -->
+      <div style="padding:20px 28px 0;">
+        <div class="modal-section-label">3 — Torque &amp; torsional Stress analysis; </div>
+      </div>
+      <div style="padding:0 28px 24px;">
+        <img src="images/academic/axle/calc-3.PNG"
+             alt="Torque,Torsional Stress"
+             style="width:100%; height:auto; display:block;
+                    border-radius:var(--radius-sm);
+                    border:1px solid var(--border);"/>
+      </div>
+
+      <div style="height:1px; background:var(--border); margin:0 28px;"></div>
+
+      <!-- Section 4 -->
+      <div style="padding:20px 28px 0;">
+        <div class="modal-section-label">4 — FBD &amp; Joint Load Calcs; </div>
+      </div>
+      <div style="padding:0 28px 24px;">
+        <img src="images/academic/axle/calc-4.PNG"
+             alt="FBD joint load"
+             style="width:100%; height:auto; display:block;
+                    border-radius:var(--radius-sm);
+                    border:1px solid var(--border);"/>
+      </div>
+
+      <div style="height:1px; background:var(--border); margin:0 28px;"></div>
+
+      <!-- Section 5 -->
+      <div style="padding:20px 28px 0;">
+        <div class="modal-section-label">5 — bearing Life &amp; campbell results</div>
+      </div>
+      <div style="padding:0 28px 28px;">
+        <img src="images/academic/axle/calc-5.PNG"
+             alt="bearing Life &amp; campbell results"
+             style="width:100%; height:auto; display:block;
+                    border-radius:var(--radius-sm);
+                    border:1px solid var(--border);"/>
+      </div>
+
+      <!-- Bottom close button so user doesn't have to scroll back up -->
+      <div style="padding:0 28px 28px; text-align:center;">
+        <button onclick="closeModal('modal-axle-calcs')"
+                style="font-family:'DM Sans',sans-serif; font-size:13px;
+                       font-weight:500; padding:10px 32px;
+                       border-radius:var(--radius-sm);
+                       border:1px solid var(--border2);
+                       background:var(--bg2); color:var(--text2);
+                       cursor:pointer; transition:all 0.15s;"
+                onmouseover="this.style.background='var(--bg3)'; this.style.color='var(--text)'"
+                onmouseout="this.style.background='var(--bg2)'; this.style.color='var(--text2)'">
+          Close ✕
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
 </body>
 </html>
