@@ -109,7 +109,7 @@
     ▶&nbsp; Watch flight video of RC Aircraft at SAE ADC 2022 event carrying 9Kg payload
   </a>
 </div>
-    <a class="proj-link" href="https://www.papermark.com/view/cmmnq4bdk0006lc04gyyun6wr" target="_blank">Full project report ↗</a>
+ <button class="report-btn" onclick="openRV('reports-img/sae-adc-2022', 7, 'SAE Aero Design Challenge 2022 — RC Aircraft', 'Structural analysis · Aerodynamics · Manufacturing')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>View Summary Report</button>
   </div>
 
   <!-- ── PROJECT 2 ── -->
@@ -147,7 +147,7 @@
       <li><strong>Additive Manufacturing:</strong> Optimized slicing parameters in Ultimaker CURA for ideal strength-to-weight ratio.</li>
     </ul>
 
-    <a class="proj-link" href="https://www.papermark.com/view/cmmnmfp710001la04xfdl3rt6" target="_blank">Full project report ↗</a>
+<button class="report-btn" onclick="openRV('reports-img/aerothon-2022', 6, 'SAE Aerothon 2022 — Precision Cargo UAV', 'Topology optimization · Impact analysis · Additive manufacturing')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>View Summary Report</button>
   </div>
 
   <!-- ── PROJECT 3 ── -->
@@ -187,7 +187,7 @@
       <li><strong>Systems Integration:</strong> Managed cross-functional mechanical and avionic timelines through mission testing.</li>
     </ul>
 
-    <a class="proj-link" href="https://www.papermark.com/view/cmmnn4xif000al504mrufzq5y" target="_blank">Full project report ↗</a>
+  <button class="report-btn" onclick="openRV('reports-img/aerothon-2023', 6, 'SAE Aerothon 2023 — Tactical Multirotor UAV', 'CFD downwash · Topology optimization · Mission profile')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>View Summary Report</button>
   </div>
 
 </main>
@@ -241,8 +241,172 @@
   }
 
   applyTheme(localStorage.getItem('theme') === 'dark');
+/* ══ REPORT IMAGE VIEWER ══ */
+  var rvPages   = [];
+  var rvCurrent = 0;
+  var rvLoaded  = {};
 
+  function openRV(folder, totalPages, title, sub) {
+    rvPages   = totalPages;
+    rvCurrent = 1;
+    rvLoaded  = {};
+
+    document.getElementById('rv-title').textContent = title;
+    document.getElementById('rv-sub').textContent   = sub;
+    document.getElementById('rv-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    document.getElementById('rv-loading').classList.remove('hide');
+    document.getElementById('rv-body').innerHTML =
+      '<div class="rv-loading" id="rv-loading"><div class="rv-spinner"></div>' +
+      '<div class="rv-loading-text">Loading report...</div></div>';
+
+    updateRVNav();
+
+    /* preload all pages */
+    var loaded = 0;
+    for (var i = 1; i <= totalPages; i++) {
+      (function(pageNum) {
+        var img = new Image();
+        img.src = folder + '/page-' +
+                  (pageNum < 10 ? '0' : '') + pageNum + '.jpg';
+        img.onload = img.onerror = function() {
+          rvLoaded[pageNum] = img.src;
+          loaded++;
+          if (loaded === 1) renderRVPage(folder, 1, totalPages);
+          if (loaded === totalPages) {
+            document.getElementById('rv-loading') &&
+            document.getElementById('rv-loading').remove();
+          }
+        };
+      })(i);
+    }
+  }
+
+  function renderRVPage(folder, page, total) {
+    var body = document.getElementById('rv-body');
+    var loading = document.getElementById('rv-loading');
+    if (loading) loading.classList.add('hide');
+
+    body.innerHTML = '';
+
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'width:100%; display:flex; flex-direction:column; align-items:center; gap:12px;';
+
+    for (var i = 1; i <= total; i++) {
+      var src = folder + '/page-' + (i < 10 ? '0' : '') + i + '.jpg';
+      var pageWrap = document.createElement('div');
+      pageWrap.style.cssText = 'width:100%; max-width:720px;';
+      pageWrap.id = 'rv-page-' + i;
+
+      var img = document.createElement('img');
+      img.src   = src;
+      img.alt   = 'Page ' + i;
+      img.style.cssText =
+        'width:100%; display:block; border-radius:4px;' +
+        'box-shadow:0 4px 20px rgba(0,0,0,0.5);' +
+        'pointer-events:none; -webkit-user-drag:none;';
+      img.setAttribute('draggable', 'false');
+      img.oncontextmenu = function() { return false; };
+
+      var num = document.createElement('div');
+      num.className   = 'rv-page-num';
+      num.textContent = i + ' / ' + total;
+
+      pageWrap.appendChild(img);
+      pageWrap.appendChild(num);
+      wrap.appendChild(pageWrap);
+    }
+
+    body.appendChild(wrap);
+
+    /* update counter */
+    document.getElementById('rv-counter').textContent = total + ' pages';
+
+    /* scroll observer to track current page */
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            var pid = parseInt(e.target.id.replace('rv-page-', ''));
+            if (!isNaN(pid)) {
+              rvCurrent = pid;
+              document.getElementById('rv-nav-info').textContent =
+                pid + ' / ' + total;
+            }
+          }
+        });
+      }, { root: body, threshold: 0.5 });
+      for (var j = 1; j <= total; j++) {
+        var el = document.getElementById('rv-page-' + j);
+        if (el) obs.observe(el);
+      }
+    }
+
+    updateRVNav();
+  }
+
+  function rvChangePage(dir) {
+    var total = rvPages;
+    rvCurrent = Math.max(1, Math.min(total, rvCurrent + dir));
+    var el = document.getElementById('rv-page-' + rvCurrent);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    updateRVNav();
+  }
+
+  function updateRVNav() {
+    var total = rvPages;
+    document.getElementById('rv-nav-info').textContent =
+      rvCurrent + ' / ' + total;
+    document.getElementById('rv-prev').disabled = (rvCurrent <= 1);
+    document.getElementById('rv-next').disabled = (rvCurrent >= total);
+  }
+
+  function closeRV() {
+    document.getElementById('rv-modal').classList.remove('open');
+    document.getElementById('rv-body').innerHTML = '';
+    document.body.style.overflow = '';
+    rvPages = []; rvCurrent = 0; rvLoaded = {};
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (!document.getElementById('rv-modal').classList.contains('open')) return;
+    if (e.key === 'Escape')     closeRV();
+    if (e.key === 'ArrowRight') rvChangePage(1);
+    if (e.key === 'ArrowLeft')  rvChangePage(-1);
+  });
 </script>
+<!-- ═══ REPORT VIEWER MODAL ═══ -->
+<div class="rv-overlay" id="rv-modal"
+     onclick="if(event.target===this)closeRV()">
+  <div class="rv-box">
 
+    <div class="rv-header">
+      <div class="rv-header-left">
+        <div class="rv-header-title" id="rv-title">Project Report</div>
+        <div class="rv-header-sub"   id="rv-sub"></div>
+      </div>
+      <div class="rv-header-right">
+        <span class="rv-page-counter" id="rv-counter"></span>
+        <button class="rv-close" onclick="closeRV()">✕</button>
+      </div>
+    </div>
+
+    <div class="rv-body" id="rv-body"
+         oncontextmenu="return false;">
+      <div class="rv-loading" id="rv-loading">
+        <div class="rv-spinner"></div>
+        <div class="rv-loading-text">Loading report...</div>
+      </div>
+    </div>
+
+    <div class="rv-nav">
+      <button class="rv-nav-btn" id="rv-prev" onclick="rvChangePage(-1)">← Prev</button>
+      <span   class="rv-nav-info" id="rv-nav-info">— / —</span>
+      <button class="rv-nav-btn" id="rv-next" onclick="rvChangePage(1)">Next →</button>
+    </div>
+
+  </div>
+</div>
 </body>
 </html>
