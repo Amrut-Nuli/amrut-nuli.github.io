@@ -196,7 +196,60 @@
   amrutnuli558@gmail.com &nbsp;·&nbsp;
   <a href="https://www.linkedin.com/in/amrut-nuli/" target="_blank">linkedin.com/in/amrut-nuli</a>
 </footer>
+<!-- ══════════════════════════════════════
+     REPORT VIEWER MODAL
+══════════════════════════════════════ -->
+<div id="rv-modal" style="
+  display:none;
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,0.85);
+  flex-direction:column;
+  align-items:center;
+">
+  <!-- Header -->
+  <div style="
+    width:100%;max-width:760px;
+    display:flex;align-items:flex-start;justify-content:space-between;
+    padding:20px 24px 10px;
+    box-sizing:border-box;
+  ">
+    <div>
+      <div id="rv-title" style="font-size:15px;font-weight:600;color:#fff;"></div>
+      <div id="rv-sub"   style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:3px;"></div>
+    </div>
+    <button onclick="closeRV()" style="
+      background:none;border:1px solid rgba(255,255,255,0.18);
+      color:#fff;border-radius:6px;padding:6px 14px;
+      cursor:pointer;font-size:13px;
+    ">✕ Close</button>
+  </div>
 
+  <!-- Nav bar -->
+  <div style="
+    width:100%;max-width:760px;
+    display:flex;align-items:center;gap:12px;
+    padding:0 24px 12px;box-sizing:border-box;
+  ">
+    <button id="rv-prev" onclick="rvChangePage(-1)" disabled style="
+      background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+      color:#fff;border-radius:6px;padding:6px 14px;cursor:pointer;font-size:13px;
+    ">← Prev</button>
+    <span id="rv-nav-info" style="font-size:12px;color:rgba(255,255,255,0.5);flex:1;text-align:center;">— / —</span>
+    <span id="rv-counter" style="font-size:12px;color:rgba(255,255,255,0.35);"></span>
+    <button id="rv-next" onclick="rvChangePage(1)" disabled style="
+      background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+      color:#fff;border-radius:6px;padding:6px 14px;cursor:pointer;font-size:13px;
+    ">Next →</button>
+  </div>
+
+  <!-- Scrollable body -->
+  <div id="rv-body" style="
+    width:100%;max-width:760px;
+    flex:1;overflow-y:auto;
+    padding:0 24px 40px;box-sizing:border-box;
+    display:flex;flex-direction:column;gap:20px;
+  "></div>
+</div>
   <script src="carousel.js"></script>
 <script>
 
