@@ -1681,3 +1681,28 @@ body.dark .stat-card::after {
   .rv-header { padding: 10px 14px; }
   .rv-header-title { font-size: 13px; }
 }
+#rv-modal        { display: none; }
+#rv-modal.open   { display: flex; }
+
+.rv-spinner {
+  width: 32px; height: 32px;
+  border: 3px solid rgba(255,255,255,0.15);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+.rv-spinner-text {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  font-family: 'DM Mono', monospace;
+}
+.rv-page-label {
+  text-align: center;
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  font-family: 'DM Mono', monospace;
+  margin-top: 6px;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
