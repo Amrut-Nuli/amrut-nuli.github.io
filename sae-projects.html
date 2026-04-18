@@ -269,7 +269,7 @@
       (function(pageNum) {
         var img = new Image();
         img.src = folder + '/page-' +
-                  (pageNum < 10 ? '0' : '') + pageNum + '.jpg';
+                  (pageNum < 10 ? '0' : '') + pageNum + '.png';
         img.onload = img.onerror = function() {
           rvLoaded[pageNum] = img.src;
           loaded++;
@@ -294,7 +294,7 @@
     wrap.style.cssText = 'width:100%; display:flex; flex-direction:column; align-items:center; gap:12px;';
 
     for (var i = 1; i <= total; i++) {
-      var src = folder + '/page-' + (i < 10 ? '0' : '') + i + '.jpg';
+      var src = folder + '/page-' + (i < 10 ? '0' : '') + i + '.png';
       var pageWrap = document.createElement('div');
       pageWrap.style.cssText = 'width:100%; max-width:720px;';
       pageWrap.id = 'rv-page-' + i;
